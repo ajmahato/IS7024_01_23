@@ -26,3 +26,6 @@ This is where Property Finder comes to your rescue. Not only does it present you
 - Frontend Developer: Ranjay Bose
 - Integration Developer: Mohammed Tahir Madni
 - Scrum master: Nishit Raj
+
+## Weekly Meeting
+Saturday 2PM to 3PM in person
