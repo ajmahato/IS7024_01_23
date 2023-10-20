@@ -1,15 +1,16 @@
 # IS7024_01_23
 ***
 Design Document  
-Ajay Mahato  
-Mohammed Tahir Madni  
-Nishit Raj  
-Ranjay Bose  
+- Ajay Mahato  
+- Mohammed Tahir Madni  
+- Nishit Raj  
+- Ranjay Bose  
 
 ## Introduction
 ***
-Have you explored the challenges of searching for a rental property? It can be quite a hassle. Sometimes, you come across a property that doesn't meet your preferences, and when you finally stumble upon a desirable one, you realize that it lacks nearby amenities, prompting you to restart your search for a more suitable place.  
-This is where Property Finder comes to your rescue. Not only does it present you with the finest available rental properties in the market, but it also provides an extensive catalog of amenities surrounding each property. With Property Finder, you can effortlessly filter properties by area, price range, and other specific criteria, streamlining your search for the perfect rental home.
+Are you tired of the monotony of your daily routine, from work or school on weekdays to city exploration on weekends? Do you long for the exhilaration of adventure and the thrill of venturing off the beaten path? We have the ideal solution for you.  
+
+Introducing **HikeIt**, your ultimate weekend getaway companion. We proudly present a meticulously curated selection of hiking trails from across the United States, guaranteed to ignite your sense of adventure. What sets us apart is that we don't just provide you with trail information; we also offer insights into the surrounding areas. This allows you to plan your entire weekend escape, including accommodations, dining options, and more.
 
 ## Data Feeds
 ***
