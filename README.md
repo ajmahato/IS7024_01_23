@@ -32,7 +32,14 @@ Introducing **HikeIt**, your ultimate weekend getaway companion. We proudly pres
 Saturday 2PM to 3PM in person
 
 ## Storyboard
-***![MicrosoftTeams-image (7)](https://github.com/ajmahato/IS7024_01_23/assets/143025251/89a27208-aec6-4b50-922d-417d26bab4a5)
+***
+![MicrosoftTeams-image (7)](https://github.com/ajmahato/IS7024_01_23/assets/143025251/89a27208-aec6-4b50-922d-417d26bab4a5)
+
+## Logo
+***
+![MicrosoftTeams-image (8)](https://github.com/ajmahato/IS7024_01_23/assets/143025251/01b32ecd-d9f3-4ea3-a411-4a37ec929d73)
+
+
 
 
 
