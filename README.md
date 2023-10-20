@@ -8,9 +8,9 @@ Design Document
 
 ## Introduction
 ***
-Are you tired of the monotony of your daily routine, from work or school on weekdays to city exploration on weekends? Do you long for the exhilaration of adventure and the thrill of venturing off the beaten path? We have the ideal solution for you.  
+Are you tired of the monotony in your daily routine. From work or school on weekdays to city exploration on weekends? Do you long for the exhilaration of adventure and the thrill of venturing off the beaten path? We have the ideal solution for you.  
 
-Introducing **HikeIt**, your ultimate weekend getaway companion. We proudly present a meticulously curated selection of hiking trails from across the United States, guaranteed to ignite your sense of adventure. What sets us apart is that we don't just provide you with trail information; we also offer insights into the surrounding areas. This allows you to plan your entire weekend escape, including accommodations, dining options, and more.
+Introducing **HikeIt**, your ultimate weekend getaway companion. We proudly present a meticulously curated selection of hiking trails from across the United States, guaranteed to ignite your sense of adventure. What sets us apart is we don't just provide you with trail information; but also offer insights into the surrounding areas. This allows you to plan your entire weekend escape, including accommodation, dining, and more.
 
 ## Data Feeds
 ***
