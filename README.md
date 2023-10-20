@@ -30,3 +30,10 @@ Introducing **HikeIt**, your ultimate weekend getaway companion. We proudly pres
 
 ## Weekly Meeting
 Saturday 2PM to 3PM in person
+
+## Storyboard
+***![MicrosoftTeams-image (7)](https://github.com/ajmahato/IS7024_01_23/assets/143025251/89a27208-aec6-4b50-922d-417d26bab4a5)
+
+
+
+
