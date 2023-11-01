@@ -1,10 +1,49 @@
 ﻿@page
+@using NationalPark;
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    List<Park> parks = (List<Park>) ViewData["Parks"];
+    List<Address> Addresses = new List<Address>();
+    List<Contacts> Contact = new List<Contacts>();
+    List<Image> Images = new List<Image>();
+    List<OperatingHour> OperatingHours = new List<OperatingHour>();
+    //var parks = ViewData["Parks"];
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <table>
+        <tr>
+            <th>ParkName</th>
+            <th>States</th>
+        </tr>
+        @{
+            foreach (Park park in parks)
+            {
+                <tr>
+                    <td>@park.Name</td>
+                    <td>@park.States</td>
+                </tr>    
+            }
+        }
+    </table>
+    @{
+        foreach (Park park in parks)
+        {
+            Addresses = (List<Address>)park.Addresses;
+            // <tr>@park.FullName</tr>
+            // <tr>XXXXXXXXXXXXXXXXXXXXXXX</tr>
+            // <tr>@park.States</tr>
+            // <tr>XXXXXXXXXXXXXXXXXXXXXXX</tr>
+            // <tr>@park.Description</tr>         
+        }
+        foreach (Address addresses in Addresses)
+        {
+            <tr>@addresses.City</tr>    
+        
+        }
+    }
 </div>
