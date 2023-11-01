@@ -1,9 +1,12 @@
 ﻿@page
 @using NationalPark;
+@using Weather;
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
     List<Park> parks = (List<Park>) ViewData["Parks"];
+    List<Weather> weathers = (List<Weather>)ViewData["Weathers"];
+    List<Datum> ForecastDatas = new List<Datum>();
     List<Address> Addresses = new List<Address>();
     List<Contacts> Contact = new List<Contacts>();
     List<Image> Images = new List<Image>();
@@ -42,8 +45,12 @@
         }
         foreach (Address addresses in Addresses)
         {
-            <tr>@addresses.City</tr>    
-        
+            <tr>@addresses.City</tr>
+
+        }
+        foreach (Weather weather in weathers)
+        {
+            <tr>@weather</tr>  
         }
     }
 </div>

@@ -15,7 +15,7 @@ namespace NationalPark
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class Welcome
+    public partial class NationalParkData
     {
         [JsonProperty("total")]
         [JsonConverter(typeof(ParseStringConverter))]
@@ -272,14 +272,14 @@ namespace NationalPark
 
     public enum Credit { NpsKristiRugg, NpsLizMacro, NpsPhoto, NpsPhotoBettyBrown };
 
-    public partial class Welcome
+    public partial class NationalParkData
     {
-        public static Welcome FromJson(string json) => JsonConvert.DeserializeObject<Welcome>(json, NationalPark.Converter.Settings);
+        public static NationalParkData FromJson(string json) => JsonConvert.DeserializeObject<NationalParkData>(json, NationalPark.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Welcome self) => JsonConvert.SerializeObject(self, NationalPark.Converter.Settings);
+        public static string ToJson(this NationalParkData self) => JsonConvert.SerializeObject(self, NationalPark.Converter.Settings);
     }
 
     internal static class Converter
