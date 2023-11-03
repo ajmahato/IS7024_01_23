@@ -108,9 +108,6 @@ namespace IS7024_01_23.Pages
                 return weatherdata;
             });
         }
-
-<<<<<<< HEAD
-=======
         private async Task<List<ParkData>> GetNewJson(List<Park> parks)
         {
             List<ParkData> parkdata = new List<ParkData>();
@@ -186,6 +183,5 @@ namespace IS7024_01_23.Pages
             });
 
         }
->>>>>>> dc14caf2edbbbe1bd9e03d8d8255d8630dded002
     }
 }
