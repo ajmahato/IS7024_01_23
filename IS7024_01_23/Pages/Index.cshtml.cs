@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NationalPark;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using parksNamespace;
 using System.Globalization;
 using WeatherSpace;
@@ -13,6 +15,9 @@ namespace IS7024_01_23.Pages
     {
         static readonly HttpClient client = new HttpClient();
         private readonly ILogger<IndexModel> _logger;
+        private string jsonString;
+        private object specimens;
+        private object Specimen;
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -39,6 +44,19 @@ namespace IS7024_01_23.Pages
             //{
             //    Task<string> readString=  result.Content.ReadAsStringAsync();
             //    string jsonString = readString.Result;
+                  Jschema schema = JSchema.Parse(System.IO.File.ReadllText("NationalParkSchema.json"));
+                  Jobject jsonObject = JObject.Parse(jsonString);
+            IList<string> validationEvents = new List<string>();
+            if (jsonObject.IsValid(schema, out validationevents)) {
+                ParkData = Park.FromJson(jsonString);  
+            } else
+            {
+                foreach(string evt in validationEvents) { 
+                    Console.Writeline(evt);
+                        }
+                }
+            }
+
             //    NationalParks = NationalParkData.FromJson(jsonString);
             //    Parks = NationalParks.Data;
             //    //Parks = 
