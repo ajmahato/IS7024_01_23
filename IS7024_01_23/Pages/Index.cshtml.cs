@@ -103,4 +103,51 @@ namespace IS7024_01_23.Pages
             });
         }
 
+        private async Task<List<ParkData>> GetNewJson(List<Park> parks)
+        {
+            List<ParkData> parkdata = new List<ParkData>();
+            Address parkAddress = new Address();
+            List<Address> parkAddress1 = new List<Address>();
+            Image parkImages = new Image();
+            List<Image> parkImages1 = new List<Image>();
+
+            int count = 0;
+            return await Task.Run(async () =>
+            {
+                foreach (Park park in parks)
+                {
+                    //Console.WriteLine(addresses.ToString());
+                    parkAddress = park.Addresses[0];
+                    parkImages = park.Images[0];
+                    parkAddress1.Add(parkAddress);
+                    parkImages1.Add(parkImages);
+                }
+                //foreach (Park image in parks)
+                //{
+                //    //Console.WriteLine(image.ToString());
+                //    parkImages.Add(image);
+                //}
+                for (int i = 0; i < parkImages1.Count; i++)
+                {
+
+                    var data = new ParkData
+                    {
+                        ParkName = parks[i].FullName,
+                        Description = parks[i].Description,
+                        Latitude = parks[i].Latitude,
+                        Longitude = parks[i].Longitude,
+                        Images = parkImages1[i].Url.ToString(),
+                        City = parkAddress1[i].City,
+                        StateCode = parkAddress1[i].StateCode
+                    };
+                    parkdata.Add(data);
+
+
+                }
+                ViewData["Address"] = parkAddress1;
+                ViewData["Images"] = parkImages1;
+                return parkdata;
+            });
+        }
     }
+}
