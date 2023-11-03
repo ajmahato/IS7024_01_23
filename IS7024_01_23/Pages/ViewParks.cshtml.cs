@@ -94,7 +94,7 @@ namespace IS7024_01_23.Pages
             var weather = new WeatherData();
             return await Task.Run(async () =>
             {
-                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=7cf5efad785c40b4b17b0d30370c265d");
+                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=e1fc3e975b86438480ca1c4c8d3a41d4");
                 HttpResponseMessage weatherResponse = await weatherTask;
                 Task<string> weatherTaskString = weatherResponse.Content.ReadAsStringAsync();
                 string weatherJson = weatherTaskString.Result;
