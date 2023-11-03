@@ -1,0 +1,230 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/WeatherData",
+  "definitions": {
+    "WeatherData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "city_name": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Datum"
+          }
+        },
+        "lat": {
+          "type": "string"
+        },
+        "lon": {
+          "type": "string"
+        },
+        "state_code": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "city_name",
+        "country_code",
+        "data",
+        "lat",
+        "lon",
+        "state_code",
+        "timezone"
+      ],
+      "title": "WeatherData"
+    },
+    "Datum": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "app_max_temp": {
+          "type": "number"
+        },
+        "app_min_temp": {
+          "type": "number"
+        },
+        "clouds": {
+          "type": "integer"
+        },
+        "clouds_hi": {
+          "type": "integer"
+        },
+        "clouds_low": {
+          "type": "integer"
+        },
+        "clouds_mid": {
+          "type": "integer"
+        },
+        "datetime": {
+          "type": "string",
+          "format": "date"
+        },
+        "dewpt": {
+          "type": "number"
+        },
+        "high_temp": {
+          "type": "number"
+        },
+        "low_temp": {
+          "type": "number"
+        },
+        "max_dhi": {
+          "type": "null"
+        },
+        "max_temp": {
+          "type": "number"
+        },
+        "min_temp": {
+          "type": "number"
+        },
+        "moon_phase": {
+          "type": "number"
+        },
+        "moon_phase_lunation": {
+          "type": "number"
+        },
+        "moonrise_ts": {
+          "type": "integer"
+        },
+        "moonset_ts": {
+          "type": "integer"
+        },
+        "ozone": {
+          "type": "number"
+        },
+        "pop": {
+          "type": "integer"
+        },
+        "precip": {
+          "type": "number"
+        },
+        "pres": {
+          "type": "number"
+        },
+        "rh": {
+          "type": "integer"
+        },
+        "slp": {
+          "type": "number"
+        },
+        "snow": {
+          "type": "integer"
+        },
+        "snow_depth": {
+          "type": "integer"
+        },
+        "sunrise_ts": {
+          "type": "integer"
+        },
+        "sunset_ts": {
+          "type": "integer"
+        },
+        "temp": {
+          "type": "number"
+        },
+        "ts": {
+          "type": "integer"
+        },
+        "uv": {
+          "type": "number"
+        },
+        "valid_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "vis": {
+          "type": "number"
+        },
+        "weather": {
+          "$ref": "#/definitions/Weather"
+        },
+        "wind_cdir": {
+          "type": "string"
+        },
+        "wind_cdir_full": {
+          "type": "string"
+        },
+        "wind_dir": {
+          "type": "integer"
+        },
+        "wind_gust_spd": {
+          "type": "number"
+        },
+        "wind_spd": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "app_max_temp",
+        "app_min_temp",
+        "clouds",
+        "clouds_hi",
+        "clouds_low",
+        "clouds_mid",
+        "datetime",
+        "dewpt",
+        "high_temp",
+        "low_temp",
+        "max_dhi",
+        "max_temp",
+        "min_temp",
+        "moon_phase",
+        "moon_phase_lunation",
+        "moonrise_ts",
+        "moonset_ts",
+        "ozone",
+        "pop",
+        "precip",
+        "pres",
+        "rh",
+        "slp",
+        "snow",
+        "snow_depth",
+        "sunrise_ts",
+        "sunset_ts",
+        "temp",
+        "ts",
+        "uv",
+        "valid_date",
+        "vis",
+        "weather",
+        "wind_cdir",
+        "wind_cdir_full",
+        "wind_dir",
+        "wind_gust_spd",
+        "wind_spd"
+      ],
+      "title": "Datum"
+    },
+    "Weather": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer"
+        },
+        "icon": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "description",
+        "icon"
+      ],
+      "title": "Weather"
+    }
+  }
+}

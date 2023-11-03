@@ -1,4 +1,4 @@
-﻿namespace Weather
+﻿namespace WeatherSpace
 {
     using System;
     using System.Collections.Generic;
@@ -162,12 +162,12 @@
 
     public partial class WeatherData
     {
-        public static WeatherData FromJson(string json) => JsonConvert.DeserializeObject<WeatherData>(json, Weather.Converter.Settings);
+        public static WeatherData FromJson(string json) => JsonConvert.DeserializeObject<WeatherData>(json, WeatherSpace.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this WeatherData self) => JsonConvert.SerializeObject(self, Weather.Converter.Settings);
+        public static string ToJson(this WeatherData self) => JsonConvert.SerializeObject(self, WeatherSpace.Converter.Settings);
     }
 
     internal static class Converter
