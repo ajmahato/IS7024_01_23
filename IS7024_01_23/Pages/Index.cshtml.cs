@@ -117,7 +117,7 @@ namespace IS7024_01_23.Pages
             WeatherData weatherdata = new WeatherData();
             return await Task.Run(async () =>
             {
-                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=7cf5efad785c40b4b17b0d30370c265d");
+                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=e1fc3e975b86438480ca1c4c8d3a41d4");
                 HttpResponseMessage weatherResponse = await weatherTask;
                 Task<string> weatherTaskString = weatherResponse.Content.ReadAsStringAsync();
                 string weatherJson = weatherTaskString.Result;
@@ -127,8 +127,6 @@ namespace IS7024_01_23.Pages
             });
         }
 
-<<<<<<< HEAD
-=======
         private async Task<List<ParkData>> GetNewJson(List<Park> parks)
         {
             List<ParkData> parkdata = new List<ParkData>();
@@ -204,6 +202,5 @@ namespace IS7024_01_23.Pages
             });
 
         }
->>>>>>> dc14caf2edbbbe1bd9e03d8d8255d8630dded002
     }
 }
