@@ -36,7 +36,7 @@ namespace FinalNamespace
         public string Longitude { get; set; }
 
         [JsonProperty("images")]
-        public List<Images> Images { get; set; }
+        public string Images { get; set; }
 
         [JsonProperty("city")]
         public string City { get; set; }
@@ -45,7 +45,7 @@ namespace FinalNamespace
         public string StateCode { get; set; }
 
         [JsonProperty("weather")]
-        public List<Weather> Weather { get; set; }
+        public List<WeatherDetails> Weather { get; set; }
     }
 
     public partial class Images
@@ -57,7 +57,7 @@ namespace FinalNamespace
         public Uri Url { get; set; }
     }
 
-    public partial class Weather
+    public partial class WeatherDetails
     {
         [JsonProperty("date")]
         public DateTimeOffset Date { get; set; }

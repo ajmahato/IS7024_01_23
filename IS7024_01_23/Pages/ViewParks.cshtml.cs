@@ -1,4 +1,4 @@
-﻿using FinalNamespace;
+using FinalNamespace;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NationalPark;
@@ -9,12 +9,12 @@ using WeatherSpace;
 
 namespace IS7024_01_23.Pages
 {
-    public class IndexModel : PageModel
+    public class ViewParksModel : PageModel
     {
         static readonly HttpClient client = new HttpClient();
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public ViewParksModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
@@ -63,11 +63,6 @@ namespace IS7024_01_23.Pages
             Task<List<ParkData>> parksdata = GetNewJson(parks);
             List<ParkData> modifiedparksdata = parksdata.Result;
 
-            
-            //This will work when we pass just one instance of the park data here.
-            //Task<List<FinalData>> finaldata = GetFinalJson(oned, forecastDatas);
-            //List<FinalData> finalJson = finaldata.Result;
-
             ViewData["Parks"] = modifiedparksdata;
             ViewData["Weathers"] = forecastDatas;
         }
@@ -96,21 +91,18 @@ namespace IS7024_01_23.Pages
         /// <returns>It returns an object of WeatherData.</returns>
         private async Task<WeatherData> GetWeatherData()
         {
-            WeatherData weatherdata = new WeatherData();
+            var weather = new WeatherData();
             return await Task.Run(async () =>
             {
                 Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=7cf5efad785c40b4b17b0d30370c265d");
                 HttpResponseMessage weatherResponse = await weatherTask;
                 Task<string> weatherTaskString = weatherResponse.Content.ReadAsStringAsync();
                 string weatherJson = weatherTaskString.Result;
-                weatherdata = WeatherData.FromJson(weatherJson);
-                //weatherdata = weather.Data;
-                return weatherdata;
+                weather = WeatherData.FromJson(weatherJson);
+                return weather;
             });
         }
 
-<<<<<<< HEAD
-=======
         private async Task<List<ParkData>> GetNewJson(List<Park> parks)
         {
             List<ParkData> parkdata = new List<ParkData>();
@@ -130,6 +122,11 @@ namespace IS7024_01_23.Pages
                     parkAddress1.Add(parkAddress);
                     parkImages1.Add(parkImages);
                 }
+                //foreach (Park image in parks)
+                //{
+                //    //Console.WriteLine(image.ToString());
+                //    parkImages.Add(image);
+                //}
                 for (int i = 0; i < parkImages1.Count; i++)
                 {
 
@@ -152,40 +149,5 @@ namespace IS7024_01_23.Pages
                 return parkdata;
             });
         }
-
-        private static async Task<FinalData> GetFinalJson(ParkData parks, List<Datum> weather)
-        {
-            FinalData finaldata = new FinalData();
-            List<WeatherDetails> weatherdatas = new List<WeatherDetails>();
-            return await Task.Run(async () =>
-            {
-                for (int i = 0; i < weather.Count; i++)
-                {
-                    var weatherdata = new WeatherDetails
-                    {
-                        Date = weather[i].Datetime,
-                        MaxTemp = weather[i].MaxTemp,
-                        MinTemp = weather[i].MinTemp,
-                        Description = weather[i].Weather.Description
-                    };
-                    weatherdatas.Add(weatherdata);
-                }
-
-                var data = new Parks
-                {
-                    ParkName = parks.ParkName,
-                    Description = parks.Description,
-                    Latitude = parks.Latitude,
-                    Longitude = parks.Longitude,
-                    Images = parks.Images,
-                    City = parks.City,
-                    StateCode = parks.StateCode,
-                    Weather = weatherdatas
-                };
-                return finaldata;
-            });
-
-        }
->>>>>>> dc14caf2edbbbe1bd9e03d8d8255d8630dded002
     }
 }
