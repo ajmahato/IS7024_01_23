@@ -44,15 +44,15 @@ namespace IS7024_01_23.Pages
             //{
             //    Task<string> readString=  result.Content.ReadAsStringAsync();
             //    string jsonString = readString.Result;
-                  Jschema schema = JSchema.Parse(System.IO.File.ReadllText("NationalParkSchema.json"));
-                  Jobject jsonObject = JObject.Parse(jsonString);
+                  JSchema schema = JSchema.Parse(System.IO.File.ReadAllText("NationalParkSchema.json"));
+                  JObject jsonObject = JObject.Parse(jsonString);
             IList<string> validationEvents = new List<string>();
-            if (jsonObject.IsValid(schema, out validationevents)) {
-                ParkData = Park.FromJson(jsonString);  
+            if (jsonObject.IsValid(schema, out validationEvents)) {
+                ParkData = NationalParkData.FromJson(jsonString);  
             } else
             {
                 foreach(string evt in validationEvents) { 
-                    Console.Writeline(evt);
+                    Console.WriteLine(evt);
                         }
                 }
             }
