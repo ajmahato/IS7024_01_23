@@ -55,8 +55,10 @@
                                 @park.City<br>
                                 @park.StateCode<br>
                                 @park.Latitude<br>
-                                @park.Longitude
-
+                                @park.Longitude<br>
+                                <a class="view-details-button"
+                                href="ParkDetail?parkName=@park.ParkName&latitude=@park.Latitude&longitude=@park.Longitude&image=@park.Images">
+                                View Details</a>
 
 
                     </p>
@@ -108,3 +110,12 @@
     }
 </div>
 
+@* <script>
+    document.querySelectorAll(".view-details-button").forEach(button => {
+        button.addEventListener("click", function (event) {
+            const parkName = event.currentTarget.getAttribute("data-park-id");
+            const url = 'ParkDetail?parkName=${encodeURIComponent(parkName)}';
+            window.location.href = url;
+        });
+    });
+</script> *@
