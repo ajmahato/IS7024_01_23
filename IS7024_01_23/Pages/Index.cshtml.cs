@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NationalPark;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using parksNamespace;
 using System.Globalization;
+using System.Text.Json.Nodes;
 using WeatherSpace;
 
 namespace IS7024_01_23.Pages
@@ -13,6 +16,9 @@ namespace IS7024_01_23.Pages
     {
         static readonly HttpClient client = new HttpClient();
         private readonly ILogger<IndexModel> _logger;
+        private string jsonString;
+        private object specimens;
+        private object Specimen;
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -25,8 +31,9 @@ namespace IS7024_01_23.Pages
             //var WeatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=7cf5efad785c40b4b17b0d30370c265d");
             //HttpResponseMessage result = task.Result;
             //HttpResponseMessage WeatherResult = WeatherTask.Result;
-            //List<Park> ParkData = new List<Park>();
+            NationalParkData ParkData1 = new NationalParkData();
             List<Datum> forecastDatas = new List<Datum>();
+            WeatherData weather = new WeatherData();
             //List<Address> Addresses = new List<Address>();
             //List<Contacts> Contact = new List<Contacts>();
             //List<Image> Images = new List<Image>();
@@ -39,6 +46,9 @@ namespace IS7024_01_23.Pages
             //{
             //    Task<string> readString=  result.Content.ReadAsStringAsync();
             //    string jsonString = readString.Result;
+                 
+            
+
             //    NationalParks = NationalParkData.FromJson(jsonString);
             //    Parks = NationalParks.Data;
             //    //Parks = 
@@ -56,6 +66,7 @@ namespace IS7024_01_23.Pages
             //{
             //    Task<string> readStrng = WeatherResult.Content.ReadAsStringAsync();
             //    string jsonString = readStrng.Result;
+
             //    Weathers = WeatherData.FromJson(jsonString);
             //    forecastDatas = Weathers.Data;
             //}
@@ -85,7 +96,22 @@ namespace IS7024_01_23.Pages
                 HttpResponseMessage parkResponse = await parkTask;
                 Task<string> parkTaskString = parkResponse.Content.ReadAsStringAsync();
                 string parkJson = parkTaskString.Result;
-                NationalParkData nationalPark = NationalParkData.FromJson(parkJson);
+                JSchema schema = JSchema.Parse(System.IO.File.ReadAllText("NationalParkSchema.json"));
+                JObject jsonObject = JObject.Parse(parkJson);
+                NationalParkData nationalPark = new NationalParkData();
+                IList<string> validationEvents = new List<string>();
+                if (jsonObject.IsValid(schema, out validationEvents))
+                {
+                    nationalPark = NationalParkData.FromJson(parkJson);
+                }
+                else
+                {
+                    foreach (string evt in validationEvents)
+                    {
+                        Console.WriteLine(evt);
+                    }
+                }
+                //NationalParkData nationalPark = NationalParkData.FromJson(parkJson);
                 Parks = nationalPark.Data;
                 return Parks;
             });
@@ -97,6 +123,7 @@ namespace IS7024_01_23.Pages
         private async Task<WeatherData> GetWeatherData()
         {
             WeatherData weatherdata = new WeatherData();
+            WeatherData weather = new WeatherData();
             return await Task.Run(async () =>
             {
                 Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=e1fc3e975b86438480ca1c4c8d3a41d4");
@@ -104,11 +131,25 @@ namespace IS7024_01_23.Pages
                 Task<string> weatherTaskString = weatherResponse.Content.ReadAsStringAsync();
                 string weatherJson = weatherTaskString.Result;
                 weatherdata = WeatherData.FromJson(weatherJson);
+                JSchema schema = JSchema.Parse(System.IO.File.ReadAllText("WeatherDataSchema.json"));
+                JObject jsonObject = JObject.Parse(weatherJson);
+
+                IList<string> validationEvents = new List<string>();
+                if (jsonObject.IsValid(schema, out validationEvents))
+                {
+                    weather = WeatherData.FromJson(weatherJson);
+                }
+                else
+                {
+                    foreach (string evt in validationEvents)
+                    {
+                        Console.WriteLine(evt);
+                    }
+                }
                 //weatherdata = weather.Data;
                 return weatherdata;
             });
         }
-
         private async Task<List<ParkData>> GetNewJson(List<Park> parks)
         {
             List<ParkData> parkdata = new List<ParkData>();

@@ -2,14 +2,34 @@
 @using NationalPark;
 @using WeatherSpace;
 @using parksNamespace;
+@using FinalNamespace;
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    //var parks = ViewData["Parks"];
+    var parks = ViewData["Parks"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link rel="stylesheet" href="~/css/styles.css" />
 
+<div class="container text-center centerdiv">
+    <h2 class="headformat">EXPLORE AMERICA'S HIKING TRAILS</h2>
+    <form method="post" class="center-form">
+        <label for="stateDropdown" class="sizeup">Select a State:</label>
+        <select id="stateDropdown" name="stateCode" class="sizeup">
+            @foreach (var state in GetStatesFromJsonFile("states.json"))
+            {
+                <option value="@state.Value">@state.Key</option>
+            }
+            }
+        </select> 
+        <button type="submit" class="sizeup">Submit</button>
+    </form>
 </div>
+
+@functions {
+    Dictionary<string, string> GetStatesFromJsonFile(string fileName)
+    {
+        var statesJson = System.IO.File.ReadAllText(fileName);
+        return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(statesJson);
+    }
+}
