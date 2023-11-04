@@ -6,107 +6,46 @@
 @{
     ViewData["Title"] = "Home page";
     List<ParkData> parks = (List<ParkData>)ViewData["Parks"];
-    List<Address> Addresses1 = (List<Address>)ViewData["Address"];
-    List<Image> images = (List<Image>)ViewData["Images"];
-    Datum weathers = (Datum)ViewData["Datum"];
-    List<Datum> ForecastDatas = new List<Datum>();
-    List<Address> Addresses = new List<Address>();
-    List<Contacts> Contact = new List<Contacts>();
-    List<Image> Images = new List<Image>();
-    List<OperatingHour> OperatingHours = new List<OperatingHour>();
-    //var parks = ViewData["Parks"];
 }
 
 <div class="jumbotron jumbotron-fluid">
-
-    @*     <table>
-    <tr>
-    <th>ParkName</th>
-    <th>States</th>
-    </tr>
-    @{
-    foreach (Park park in parks)
-    {
-    <tr>
-    <td>@park.Name</td>
-    <td>@park.States</td>
-    </tr>
-    }
-    }
-    </table> *@
-
 
     @{
         foreach (ParkData park in parks)
         {
             <br>
-    <div class="container">
-        <div class="row justify-content-md-center">
+            <div class="container">
+                <div class="row justify-content-md-center">
 
-            <div class="card" style="width:40rem; border:1px solid green">
-                        <img class="card-img-top" src="@park.Images" alt="Card image cap">
-                <div class="card-body">
-                            <h5 class="card-title">@park.ParkName</h5>
-                    <p class="card-text">
-                                @park.Description
-                                <br>
-                                <b>Address:</b>
-                                <br>
-                                @park.City<br>
-                                @park.StateCode<br>
-                                @park.Latitude<br>
-                                @park.Longitude<br>
-                                <a class="view-details-button"
-                                href="ParkDetail?parkName=@park.ParkName&latitude=@park.Latitude&longitude=@park.Longitude&image=@park.Images">
-                                View Details</a>
+                    <div class="card" style="width:40rem; border:1px solid green">
+                                <img class="card-img-top" src="@park.Images" alt="Card image cap">
+                        <div class="card-body">
+                                    <h5 class="card-title">@park.ParkName</h5>
+                            <p class="card-text">
+                                        @park.Description
+                                        <br>
+                                        <b>Address:</b>
+                                        <br>
+                                        @park.City<br>
+                                        @park.StateCode<br>
+                                        @park.Latitude<br>
+                                        @park.Longitude<br>
+                                        <a class="view-details-button"
+                                        href="ParkDetail?parkName=@park.ParkName&latitude=@park.Latitude&longitude=@park.Longitude&image=@park.Images">
+                                        View Details</a>
 
 
-                    </p>
+                            </p>
                     
-                </div>
+                        </div>
 
-            </div>
+                    </div>
             
-        </div>
+                </div>
         
-    </div>
+            </div>
 
-
-
-
-        //     <tr>@park.ParkName</tr>
-        //     <br>
-        //     <tr>@park.Description</tr>
-
-        //     <br>
-        //     <tr>@park.City</tr>
-
-        //     <br>
-        //     <tr>@park.StateCode</tr>
-
-        //     <br>
-        //     <tr>@park.Latitude</tr>
-
-        //     <br>
-        //     <tr>@park.Longitude</tr>
-
-        //     <br>
-        //     <img src="@park.Images" />
-        //     <p>######################################################</p>
-        //     <br>
-         }
-        // foreach (Address addresses in Addresses1)
-        // {
-        //     <tr>@addresses.City</tr>
-        //     <tr>@addresses.StateCode</tr>
-        //     <tr>@addresses.PostalCode</tr>
-
-        // }
-        // foreach(Image img in images)
-        // {
-        //     <img src="@img.Url"/>
-        // }
-
+        }
     }
 </div>
 

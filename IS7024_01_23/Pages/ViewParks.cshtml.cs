@@ -1,7 +1,7 @@
 using FinalNamespace;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using NationalPark;
+using StateNamespace;
 using Newtonsoft.Json;
 using parksNamespace;
 using System.Globalization;
@@ -43,8 +43,11 @@ namespace IS7024_01_23.Pages
             //    Parks = NationalParks.Data;
             //    //Parks = 
             //}
-            Task<List<Park>> ParkData = GetParkData();
-            List<Park> parks = ParkData.Result;
+
+            string statecode = Request.Query["stateCode"].ToString();
+
+            Task<List<StateData>> ParkData = GetParkData(statecode);
+            List<StateData> parks = ParkData.Result;
 
             Task<WeatherData> weatherData = GetWeatherData();
             WeatherData weathers = weatherData.Result;
@@ -70,17 +73,25 @@ namespace IS7024_01_23.Pages
         /// This function calls the National Parks API and gets information on all the parks.
         /// </summary>
         /// <returns>It returns an object of Park.</returns>
-        private async Task<List<Park>> GetParkData()
+        private async Task<List<StateData>> GetParkData(string statecode)
         {
-            List<Park> Parks = new List<Park>();
+            List<StateData> Parks = new List<StateData>();
             return await Task.Run(async () =>
             {
-                Task<HttpResponseMessage> parkTask = client.GetAsync("https://developer.nps.gov/api/v1/parks?limit=5&api_key=OYKRBWxnitTDzh8ovGqci8Ilgwr6l3gqIZ20QBHU");
+                var config = new ConfigurationBuilder()
+                .AddUserSecrets<Program>()
+                .Build();
+                string apikey = config["NPSkey"];
+
+                var url = "https://developer.nps.gov/api/v1/parks?stateCode=" + statecode + "&limit=5&api_key="+apikey;
+                
+                
+                Task<HttpResponseMessage> parkTask = client.GetAsync(url);
 
                 HttpResponseMessage parkResponse = await parkTask;
                 Task<string> parkTaskString = parkResponse.Content.ReadAsStringAsync();
                 string parkJson = parkTaskString.Result;
-                NationalParkData nationalPark = NationalParkData.FromJson(parkJson);
+                StateJson nationalPark = StateJson.FromJson(parkJson);
                 Parks = nationalPark.Data;
                 return Parks;
             });
@@ -103,7 +114,7 @@ namespace IS7024_01_23.Pages
             });
         }
 
-        private async Task<List<ParkData>> GetNewJson(List<Park> parks)
+        private async Task<List<ParkData>> GetNewJson(List<StateData> parks)
         {
             List<ParkData> parkdata = new List<ParkData>();
             Address parkAddress = new Address();
@@ -114,7 +125,7 @@ namespace IS7024_01_23.Pages
             int count = 0;
             return await Task.Run(async () =>
             {
-                foreach (Park park in parks)
+                foreach (StateData park in parks)
                 {
                     //Console.WriteLine(addresses.ToString());
                     parkAddress = park.Addresses[0];
