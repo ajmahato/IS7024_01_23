@@ -22,7 +22,7 @@ Introducing **HikeIt**, your ultimate weekend getaway companion. We proudly pres
 ## Data Feeds
 ***
 [National Park Service](https://www.nps.gov/subjects/developer/api-documentation.htm#/campgrounds/getCampgrounds)  
-[Google places](https://developers.google.com/maps/documentation/places/web-service)  
+[Wearther Bit](https://www.weatherbit.io/)  
 
 ## Functional Requirements
 
