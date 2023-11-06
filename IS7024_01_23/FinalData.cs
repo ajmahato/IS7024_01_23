@@ -46,6 +46,7 @@ namespace FinalNamespace
 
         [JsonProperty("weather")]
         public List<WeatherDetails> Weather { get; set; }
+
     }
 
     public partial class Images
@@ -58,6 +59,7 @@ namespace FinalNamespace
     }
 
     public partial class WeatherDetails
+
     {
         [JsonProperty("date")]
         public DateTimeOffset Date { get; set; }
