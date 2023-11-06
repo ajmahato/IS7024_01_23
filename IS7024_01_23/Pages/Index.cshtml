@@ -1,10 +1,64 @@
 ﻿@page
+@using NationalPark;
+@using WeatherSpace;
+@using parksNamespace;
+@using FinalNamespace;
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var parks = ViewData["Parks"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link rel="stylesheet" href="~/css/styles.css" />
+
+<div class="container text-center centerdiv">
+    <h2 class="headformat">EXPLORE AMERICA'S HIKING TRAILS</h2>
+ @*   <form method="post" class="center-form" action="/ViewParks"> *@
+    <form method="get" class="center-form" action="/ViewParks">
+        <label for="stateDropdown" class="sizeup">Select a State:</label>
+        <select id="stateDropdown" name="stateCode" class="sizeup">
+            @foreach (var state in GetStatesFromJsonFile("states.json"))
+            {
+                <option value=@state.Value>@state.Key</option>
+            }
+            }
+        </select> 
+        <button type="submit" class="sizeup">Submit</button>
+    </form>
 </div>
+
+@* <div class="container text-center centerdiv">
+    <h2 class="headformat">EXPLORE AMERICA'S HIKING TRAILS</h2>
+    <form method="post" class="center-form">
+        <label for="stateDropdown" class="sizeup">Select a State:</label>
+        <select id="stateDropdown" name="stateCode" class="sizeup">
+            @foreach (var state in GetStatesFromJsonFile("states.json"))
+            {
+                <option value=@state.Value>@state.Key</option>
+            }
+            }
+        </select>
+        <button type="submit" class="sizeup"><a class="nav-link text-dark" asp-area="" asp-page="/ViewParks">Submit</a></button>
+    </form>
+</div> *@
+<script>
+    document.getElementById('parkForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        var selectedState = document.getElementById('stateDropdown').value;
+        var form = document.getElementById('parkForm');
+        console.log(selectedState);
+        // Append the selected state as a query parameter to the form's action URL
+        form.action = '/ViewParks?stateCode=' + selectedState;
+
+        // Submit the form
+        form.submit();
+    });
+</script>
+@functions {
+    Dictionary<string, string> GetStatesFromJsonFile(string fileName)
+    {
+        var statesJson = System.IO.File.ReadAllText(fileName);
+        return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(statesJson);
+    }
+}

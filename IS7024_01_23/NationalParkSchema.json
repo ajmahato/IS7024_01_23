@@ -1,0 +1,486 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/NationalParkData",
+  "definitions": {
+    "NationalParkData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "integer"
+        },
+        "limit": {
+          "type": "string",
+          "format": "integer"
+        },
+        "start": {
+          "type": "string",
+          "format": "integer"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Datum"
+          }
+        }
+      },
+      "required": [
+        "data",
+        "limit",
+        "start",
+        "total"
+      ],
+      "title": "NationalParkData"
+    },
+    "Datum": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "https"
+          ],
+          "qt-uri-extensions": [
+            ".htm"
+          ]
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "parkCode": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "string"
+        },
+        "longitude": {
+          "type": "string"
+        },
+        "latLong": {
+          "type": "string"
+        },
+        "activities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        },
+        "states": {
+          "type": "string"
+        },
+        "contacts": {
+          "$ref": "#/definitions/Contacts"
+        },
+        "entranceFees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entrance"
+          }
+        },
+        "entrancePasses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entrance"
+          }
+        },
+        "fees": {
+          "type": "array",
+          "items": {}
+        },
+        "directionsInfo": {
+          "type": "string"
+        },
+        "directionsUrl": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "http"
+          ],
+          "qt-uri-extensions": [
+            ".htm"
+          ]
+        },
+        "operatingHours": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperatingHour"
+          }
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        },
+        "weatherInfo": {
+          "type": "string",
+          "qt-uri-protocols": [
+            "http"
+          ],
+          "qt-uri-extensions": [
+            ".php"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "designation": {
+          "type": "string"
+        },
+        "relevanceScore": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "activities",
+        "addresses",
+        "contacts",
+        "description",
+        "designation",
+        "directionsInfo",
+        "directionsUrl",
+        "entranceFees",
+        "entrancePasses",
+        "fees",
+        "fullName",
+        "id",
+        "images",
+        "latLong",
+        "latitude",
+        "longitude",
+        "name",
+        "operatingHours",
+        "parkCode",
+        "relevanceScore",
+        "states",
+        "topics",
+        "url",
+        "weatherInfo"
+      ],
+      "title": "Datum"
+    },
+    "Activity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "Activity"
+    },
+    "Address": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "postalCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "stateCode": {
+          "type": "string"
+        },
+        "countryCode": {
+          "$ref": "#/definitions/CountryCode"
+        },
+        "provinceTerritoryCode": {
+          "type": "string"
+        },
+        "line1": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/Type"
+        },
+        "line3": {
+          "$ref": "#/definitions/Line3"
+        },
+        "line2": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "city",
+        "countryCode",
+        "line1",
+        "line2",
+        "line3",
+        "postalCode",
+        "provinceTerritoryCode",
+        "stateCode",
+        "type"
+      ],
+      "title": "Address"
+    },
+    "Contacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhoneNumber"
+          }
+        },
+        "emailAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailAddress"
+          }
+        }
+      },
+      "required": [
+        "emailAddresses",
+        "phoneNumbers"
+      ],
+      "title": "Contacts"
+    },
+    "EmailAddress": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "emailAddress"
+      ],
+      "title": "EmailAddress"
+    },
+    "PhoneNumber": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "phoneNumber": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "extension": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "extension",
+        "phoneNumber",
+        "type"
+      ],
+      "title": "PhoneNumber"
+    },
+    "Entrance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cost": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "cost",
+        "description",
+        "title"
+      ],
+      "title": "Entrance"
+    },
+    "Image": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "credit": {
+          "$ref": "#/definitions/Credit"
+        },
+        "title": {
+          "type": "string"
+        },
+        "altText": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "https"
+          ],
+          "qt-uri-extensions": [
+            ".jpg"
+          ]
+        }
+      },
+      "required": [
+        "altText",
+        "caption",
+        "credit",
+        "title",
+        "url"
+      ],
+      "title": "Image"
+    },
+    "OperatingHour": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Exception"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "standardHours": {
+          "$ref": "#/definitions/Hours"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "exceptions",
+        "name",
+        "standardHours"
+      ],
+      "title": "OperatingHour"
+    },
+    "Exception": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "exceptionHours": {
+          "$ref": "#/definitions/Hours"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "name": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "endDate",
+        "exceptionHours",
+        "name",
+        "startDate"
+      ],
+      "title": "Exception"
+    },
+    "Hours": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wednesday": {
+          "type": "string"
+        },
+        "monday": {
+          "type": "string"
+        },
+        "thursday": {
+          "type": "string"
+        },
+        "sunday": {
+          "type": "string"
+        },
+        "tuesday": {
+          "type": "string"
+        },
+        "friday": {
+          "type": "string"
+        },
+        "saturday": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "Hours"
+    },
+    "CountryCode": {
+      "type": "string",
+      "enum": [
+        "US"
+      ],
+      "title": "CountryCode"
+    },
+    "Line3": {
+      "type": "string",
+      "enum": [
+        "",
+        "1st Floor",
+        "26 Wall St"
+      ],
+      "title": "Line3"
+    },
+    "Type": {
+      "type": "string",
+      "enum": [
+        "Physical",
+        "Mailing"
+      ],
+      "title": "Type"
+    },
+    "Credit": {
+      "type": "string",
+      "enum": [
+        "NPS Photo",
+        "NPS / Kristi Rugg",
+        "NPS Photo / Betty Brown",
+        "NPS / Liz Macro"
+      ],
+      "title": "Credit"
+    }
+  }
+}

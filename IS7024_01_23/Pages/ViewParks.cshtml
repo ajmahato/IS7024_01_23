@@ -1,0 +1,60 @@
+﻿@page
+@using NationalPark;
+@using WeatherSpace;
+@using parksNamespace;
+@model ViewParksModel
+@{
+    ViewData["Title"] = "Home page";
+    List<ParkData> parks = (List<ParkData>)ViewData["Parks"];
+}
+
+<div class="jumbotron jumbotron-fluid">
+
+    @{
+        foreach (ParkData park in parks)
+        {
+            <br>
+            <div class="container">
+                <div class="row justify-content-md-center">
+
+                    <div class="card" style="width:40rem; border:1px solid green">
+                                <img class="card-img-top" src="@park.Images" alt="Card image cap">
+                        <div class="card-body">
+                                    <h5 class="card-title">@park.ParkName</h5>
+                            <p class="card-text">
+                                        @park.Description
+                                        <br>
+                                        <b>Address:</b>
+                                        <br>
+                                        @park.City<br>
+                                        @park.StateCode<br>
+                                        @park.Latitude<br>
+                                        @park.Longitude<br>
+                                        <a class="view-details-button"
+                                        href="ParkDetail?parkName=@park.ParkName&latitude=@park.Latitude&longitude=@park.Longitude&image=@park.Images">
+                                        View Details</a>
+
+
+                            </p>
+                    
+                        </div>
+
+                    </div>
+            
+                </div>
+        
+            </div>
+
+        }
+    }
+</div>
+
+@* <script>
+    document.querySelectorAll(".view-details-button").forEach(button => {
+        button.addEventListener("click", function (event) {
+            const parkName = event.currentTarget.getAttribute("data-park-id");
+            const url = 'ParkDetail?parkName=${encodeURIComponent(parkName)}';
+            window.location.href = url;
+        });
+    });
+</script> *@

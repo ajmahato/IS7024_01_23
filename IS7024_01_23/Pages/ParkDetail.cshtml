@@ -1,0 +1,34 @@
+﻿@page
+@model ParkDetailModel
+@{
+}
+
+<div id="park-details-container">
+    <h1>Park Details</h1>
+    <p id="park-name"></p>
+    <p id="park-description"></p>
+    <p id="park-latitude"></p>
+    <p id="park-longitude"></p>
+    <img id="park-image" src="" alt="Park Image">
+    <!-- Add other fields here as needed -->
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const parkName = urlParams.get("parkName");
+        const latitude = urlParams.get("latitude");
+        const longitude = urlParams.get("longitude");
+        const image = decodeURIComponent(urlParams.get("image"));
+
+        // Fetch additional data based on the parkName if needed
+        // Example: Make an API request to get more details
+
+        // Update the page with the data
+        document.getElementById("park-name").textContent = "Park Name: " + parkName;
+        document.getElementById("park-latitude").textContent = "Park Latitude: " + latitude;
+        document.getElementById("park-longitude").textContent = "Park Longitude: " + longitude;
+        document.getElementById("park-image").src = image;
+        // You can populate other fields in a similar way
+    });
+</script>

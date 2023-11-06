@@ -1,26 +1,20 @@
-﻿using FinalNamespace;
+using FinalNamespace;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using NationalPark;
+using StateNamespace;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
 using parksNamespace;
 using System.Globalization;
-using System.Text.Json.Nodes;
 using WeatherSpace;
 
 namespace IS7024_01_23.Pages
 {
-    public class IndexModel : PageModel
+    public class ViewParksModel : PageModel
     {
         static readonly HttpClient client = new HttpClient();
         private readonly ILogger<IndexModel> _logger;
-        private string jsonString;
-        private object specimens;
-        private object Specimen;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public ViewParksModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
@@ -31,9 +25,8 @@ namespace IS7024_01_23.Pages
             //var WeatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=7cf5efad785c40b4b17b0d30370c265d");
             //HttpResponseMessage result = task.Result;
             //HttpResponseMessage WeatherResult = WeatherTask.Result;
-            NationalParkData ParkData1 = new NationalParkData();
+            //List<Park> ParkData = new List<Park>();
             List<Datum> forecastDatas = new List<Datum>();
-            WeatherData weather = new WeatherData();
             //List<Address> Addresses = new List<Address>();
             //List<Contacts> Contact = new List<Contacts>();
             //List<Image> Images = new List<Image>();
@@ -46,15 +39,15 @@ namespace IS7024_01_23.Pages
             //{
             //    Task<string> readString=  result.Content.ReadAsStringAsync();
             //    string jsonString = readString.Result;
-                 
-            
-
             //    NationalParks = NationalParkData.FromJson(jsonString);
             //    Parks = NationalParks.Data;
             //    //Parks = 
             //}
-            Task<List<Park>> ParkData = GetParkData();
-            List<Park> parks = ParkData.Result;
+
+            string statecode = Request.Query["stateCode"].ToString();
+
+            Task<List<StateData>> ParkData = GetParkData(statecode);
+            List<StateData> parks = ParkData.Result;
 
             Task<WeatherData> weatherData = GetWeatherData();
             WeatherData weathers = weatherData.Result;
@@ -66,18 +59,12 @@ namespace IS7024_01_23.Pages
             //{
             //    Task<string> readStrng = WeatherResult.Content.ReadAsStringAsync();
             //    string jsonString = readStrng.Result;
-
             //    Weathers = WeatherData.FromJson(jsonString);
             //    forecastDatas = Weathers.Data;
             //}
 
             Task<List<ParkData>> parksdata = GetNewJson(parks);
             List<ParkData> modifiedparksdata = parksdata.Result;
-
-            
-            //This will work when we pass just one instance of the park data here.
-            //Task<List<FinalData>> finaldata = GetFinalJson(oned, forecastDatas);
-            //List<FinalData> finalJson = finaldata.Result;
 
             ViewData["Parks"] = modifiedparksdata;
             ViewData["Weathers"] = forecastDatas;
@@ -86,9 +73,9 @@ namespace IS7024_01_23.Pages
         /// This function calls the National Parks API and gets information on all the parks.
         /// </summary>
         /// <returns>It returns an object of Park.</returns>
-        private async Task<List<Park>> GetParkData()
+        private async Task<List<StateData>> GetParkData(string statecode)
         {
-            List<Park> Parks = new List<Park>();
+            List<StateData> Parks = new List<StateData>();
             return await Task.Run(async () =>
             {
                 var config = new ConfigurationBuilder()
@@ -96,27 +83,15 @@ namespace IS7024_01_23.Pages
                 .Build();
                 string apikey = config["NPSkey"];
 
-                Task<HttpResponseMessage> parkTask = client.GetAsync("https://developer.nps.gov/api/v1/parks?limit=5&api_key="+apikey);
+                var url = "https://developer.nps.gov/api/v1/parks?stateCode=" + statecode + "&limit=5&api_key="+apikey;
+                
+                
+                Task<HttpResponseMessage> parkTask = client.GetAsync(url);
 
                 HttpResponseMessage parkResponse = await parkTask;
                 Task<string> parkTaskString = parkResponse.Content.ReadAsStringAsync();
                 string parkJson = parkTaskString.Result;
-                JSchema schema = JSchema.Parse(System.IO.File.ReadAllText("NationalParkSchema.json"));
-                JObject jsonObject = JObject.Parse(parkJson);
-                NationalParkData nationalPark = new NationalParkData();
-                IList<string> validationEvents = new List<string>();
-                if (jsonObject.IsValid(schema, out validationEvents))
-                {
-                    nationalPark = NationalParkData.FromJson(parkJson);
-                }
-                else
-                {
-                    foreach (string evt in validationEvents)
-                    {
-                        Console.WriteLine(evt);
-                    }
-                }
-                //NationalParkData nationalPark = NationalParkData.FromJson(parkJson);
+                StateJson nationalPark = StateJson.FromJson(parkJson);
                 Parks = nationalPark.Data;
                 return Parks;
             });
@@ -127,40 +102,19 @@ namespace IS7024_01_23.Pages
         /// <returns>It returns an object of WeatherData.</returns>
         private async Task<WeatherData> GetWeatherData()
         {
-            WeatherData weatherdata = new WeatherData();
-            WeatherData weather = new WeatherData();
+            var weather = new WeatherData();
             return await Task.Run(async () =>
             {
-                var config = new ConfigurationBuilder()
-                .AddUserSecrets<Program>()
-                .Build();
-                string apikey = config["weatherkey"];
-
-                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key="+apikey);
+                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=e1fc3e975b86438480ca1c4c8d3a41d4");
                 HttpResponseMessage weatherResponse = await weatherTask;
                 Task<string> weatherTaskString = weatherResponse.Content.ReadAsStringAsync();
                 string weatherJson = weatherTaskString.Result;
-                weatherdata = WeatherData.FromJson(weatherJson);
-                JSchema schema = JSchema.Parse(System.IO.File.ReadAllText("WeatherDataSchema.json"));
-                JObject jsonObject = JObject.Parse(weatherJson);
-
-                IList<string> validationEvents = new List<string>();
-                if (jsonObject.IsValid(schema, out validationEvents))
-                {
-                    weather = WeatherData.FromJson(weatherJson);
-                }
-                else
-                {
-                    foreach (string evt in validationEvents)
-                    {
-                        Console.WriteLine(evt);
-                    }
-                }
-                //weatherdata = weather.Data;
-                return weatherdata;
+                weather = WeatherData.FromJson(weatherJson);
+                return weather;
             });
         }
-        private async Task<List<ParkData>> GetNewJson(List<Park> parks)
+
+        private async Task<List<ParkData>> GetNewJson(List<StateData> parks)
         {
             List<ParkData> parkdata = new List<ParkData>();
             Address parkAddress = new Address();
@@ -171,7 +125,7 @@ namespace IS7024_01_23.Pages
             int count = 0;
             return await Task.Run(async () =>
             {
-                foreach (Park park in parks)
+                foreach (StateData park in parks)
                 {
                     //Console.WriteLine(addresses.ToString());
                     parkAddress = park.Addresses[0];
@@ -179,6 +133,11 @@ namespace IS7024_01_23.Pages
                     parkAddress1.Add(parkAddress);
                     parkImages1.Add(parkImages);
                 }
+                //foreach (Park image in parks)
+                //{
+                //    //Console.WriteLine(image.ToString());
+                //    parkImages.Add(image);
+                //}
                 for (int i = 0; i < parkImages1.Count; i++)
                 {
 
@@ -200,40 +159,6 @@ namespace IS7024_01_23.Pages
                 ViewData["Images"] = parkImages1;
                 return parkdata;
             });
-        }
-
-        private static async Task<FinalData> GetFinalJson(ParkData parks, List<Datum> weather)
-        {
-            FinalData finaldata = new FinalData();
-            List<WeatherDetails> weatherdatas = new List<WeatherDetails>();
-            return await Task.Run(async () =>
-            {
-                for (int i = 0; i < weather.Count; i++)
-                {
-                    var weatherdata = new WeatherDetails
-                    {
-                        Date = weather[i].Datetime,
-                        MaxTemp = weather[i].MaxTemp,
-                        MinTemp = weather[i].MinTemp,
-                        Description = weather[i].Weather.Description
-                    };
-                    weatherdatas.Add(weatherdata);
-                }
-
-                var data = new Parks
-                {
-                    ParkName = parks.ParkName,
-                    Description = parks.Description,
-                    Latitude = parks.Latitude,
-                    Longitude = parks.Longitude,
-                    Images = parks.Images,
-                    City = parks.City,
-                    StateCode = parks.StateCode,
-                    Weather = weatherdatas
-                };
-                return finaldata;
-            });
-
         }
     }
 }
