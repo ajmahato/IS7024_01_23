@@ -27,17 +27,11 @@ namespace IS7024_01_23.Pages
 
         public void OnGet()
         {
-            //var task = client.GetAsync("https://developer.nps.gov/api/v1/parks?limit=5&api_key=OYKRBWxnitTDzh8ovGqci8Ilgwr6l3gqIZ20QBHU");
-            //var WeatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=7cf5efad785c40b4b17b0d30370c265d");
-            //HttpResponseMessage result = task.Result;
-            //HttpResponseMessage WeatherResult = WeatherTask.Result;
+            
             NationalParkData ParkData1 = new NationalParkData();
             List<Datum> forecastDatas = new List<Datum>();
             WeatherData weather = new WeatherData();
-            //List<Address> Addresses = new List<Address>();
-            //List<Contacts> Contact = new List<Contacts>();
-            //List<Image> Images = new List<Image>();
-            //List<OperatingHour> OperatingHours = new List<OperatingHour>();
+
 
 
             ////This is useful
@@ -96,7 +90,7 @@ namespace IS7024_01_23.Pages
                 .Build();
                 string apikey = config["NPSkey"];
 
-                Task<HttpResponseMessage> parkTask = client.GetAsync("https://developer.nps.gov/api/v1/parks?limit=5&api_key="+apikey);
+                Task<HttpResponseMessage> parkTask = client.GetAsync("https://developer.nps.gov/api/v1/parks?limit=5&api_key=OYKRBWxnitTDzh8ovGqci8Ilgwr6l3gqIZ20QBHU");
 
                 HttpResponseMessage parkResponse = await parkTask;
                 Task<string> parkTaskString = parkResponse.Content.ReadAsStringAsync();
@@ -136,7 +130,7 @@ namespace IS7024_01_23.Pages
                 .Build();
                 string apikey = config["weatherkey"];
 
-                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key="+apikey);
+                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=7cf5efad785c40b4b17b0d30370c265d");
                 HttpResponseMessage weatherResponse = await weatherTask;
                 Task<string> weatherTaskString = weatherResponse.Content.ReadAsStringAsync();
                 string weatherJson = weatherTaskString.Result;
