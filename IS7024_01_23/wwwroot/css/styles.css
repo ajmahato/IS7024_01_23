@@ -28,3 +28,7 @@
     height: 65px;
     text-align: center;
 }
+
+.dropdown-menu {
+    transform: translate3d(5px, 35px, 0px) !important;
+}
