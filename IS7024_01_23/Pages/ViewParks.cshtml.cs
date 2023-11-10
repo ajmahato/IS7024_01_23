@@ -11,6 +11,116 @@ namespace IS7024_01_23.Pages
 {
     public class ViewParksModel : PageModel
     {
+        public static string ConvertState(string state)
+        {
+            switch (state)
+            {
+                case "AL":
+                    return "Alabama";
+                case "AK":
+                    return "Alaska";
+                case "AR":
+                    return "Arkansas";
+                case "AZ":
+                    return "Arizona";
+                case "CA":
+                    return "California";
+                case "CO":
+                    return "Colorado";
+                case "CT":
+                    return "Connecticut";
+                case "DE":
+                    return "Delaware";
+                case "FL":
+                    return "Florida";
+                case "GA":
+                    return "Georgia";
+                case "HI":
+                    return "Hawaii";
+                case "ID":
+                    return "Idaho";
+                case "IL":
+                    return "Illinois";
+                case "IN":
+                    return "Indiana";
+                case "IA":
+                    return "Iowa";
+                case "KS":
+                    return "Kansas";
+                case "KY":
+                    return "Kentucky";
+                case "LA":
+                    return "Louisiana";
+                case "ME":
+                    return "Maine";
+                case "MD":
+                    return "Maryland";
+                case "MA":
+                    return "Massachusetts";
+                case "MI":
+                    return "Michigan";
+                case "MN":
+                    return "Minnesota";
+                case "MS":
+                    return "Mississippi";
+                case "MO":
+                    return "Missouri";
+                case "MT":
+                    return "Montana";
+                case "NE":
+                    return "Nebraska";
+                case "NV":
+                    return "Nevada";
+                case "NH":
+                    return "New Hampshire";
+                case "NJ":
+                    return "New Jersey";
+                case "NM":
+                    return "New Mexico";
+                case "NY":
+                    return "New York";
+                case "NC":
+                    return "North Carolina";
+                case "ND":
+                    return "North Dakota";
+                case "OH":
+                    return "Ohio";
+                case "OK":
+                    return "Oklahoma";
+                case "OR":
+                    return "Oregon";
+                case "PA":
+                    return "Pennsylvania";
+                case "RI":
+                    return "Rhode Island";
+                case "SC":
+                    return "South Carolina";
+                case "SD":
+                    return "South Dakota";
+                case "TN":
+                    return "Tennessee";
+                case "TX":
+                    return "Texas";
+                case "UT":
+                    return "Utah";
+                case "VT":
+                    return "Vermont";
+                case "VA":
+                    return "Virginia";
+                case "WA":
+                    return "Washington";
+                case "WV":
+                    return "West Virginia";
+                case "WI":
+                    return "Wisconsin";
+                case "WY":
+                    return "Wyoming";
+                default:
+                    return state;
+            }
+        }
+
+
         static readonly HttpClient client = new HttpClient();
         private readonly ILogger<IndexModel> _logger;
 
@@ -63,12 +173,29 @@ namespace IS7024_01_23.Pages
             //    forecastDatas = Weathers.Data;
             //}
 
-            Task<List<ParkData>> parksdata = GetNewJson(parks);
-            List<ParkData> modifiedparksdata = parksdata.Result;
+            // attempted try catch, clicking Arkansas from index page breaks application
+            try
+            {
+                Task<List<ParkData>> parksdata = GetNewJson(parks);
+                List<ParkData> modifiedparksdata = parksdata.Result;
+                ViewData["Parks"] = modifiedparksdata;
+                ViewData["Weathers"] = forecastDatas;
+            }
+            catch (Exception e)
+            {
+                LogError(e, "Shape processing failed.");
+                throw;
+            }
+      
 
-            ViewData["Parks"] = modifiedparksdata;
-            ViewData["Weathers"] = forecastDatas;
+           
         }
+
+        private void LogError(Exception e, string v)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// This function calls the National Parks API and gets information on all the parks.
         /// </summary>
@@ -83,7 +210,7 @@ namespace IS7024_01_23.Pages
                 .Build();
                 string apikey = config["NPSkey"];
 
-                var url = "https://developer.nps.gov/api/v1/parks?stateCode=" + statecode + "&limit=5&api_key="+apikey;
+                var url = "https://developer.nps.gov/api/v1/parks?stateCode=" + statecode + "&limit=5&api_key="+ "OYKRBWxnitTDzh8ovGqci8Ilgwr6l3gqIZ20QBHU";
                 
                 
                 Task<HttpResponseMessage> parkTask = client.GetAsync(url);
@@ -149,7 +276,7 @@ namespace IS7024_01_23.Pages
                         Longitude = parks[i].Longitude,
                         Images = parkImages1[i].Url.ToString(),
                         City = parkAddress1[i].City,
-                        StateCode = parkAddress1[i].StateCode
+                        StateCode = ConvertState(parkAddress1[i].StateCode)
                     };
                     parkdata.Add(data);
 

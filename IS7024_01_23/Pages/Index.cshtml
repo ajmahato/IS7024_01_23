@@ -15,15 +15,17 @@
     <h2 class="headformat">EXPLORE AMERICA'S HIKING TRAILS</h2>
  @*   <form method="post" class="center-form" action="/ViewParks"> *@
     <form method="get" class="center-form" action="/ViewParks">
-        <label for="stateDropdown" class="sizeup">Select a State:</label>
-        <select id="stateDropdown" name="stateCode" class="sizeup">
+        <div>
+            <em><label for="stateDropdown" class="lead">Select a State:</label></em>
+            <select id="stateDropdown" name="stateCode" class="btn btn-outline-secondary dropdown-toggle btn-md me-3">
             @foreach (var state in GetStatesFromJsonFile("states.json"))
             {
                 <option value=@state.Value>@state.Key</option>
             }
             }
-        </select> 
-        <button type="submit" class="sizeup">Submit</button>
+            </select>
+            <button type="submit" class="btn btn-secondary btn-md">Submit</button>
+        </div>
     </form>
 </div>
 

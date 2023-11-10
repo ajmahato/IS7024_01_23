@@ -108,7 +108,9 @@ namespace NationalPark
         public long RelevanceScore { get; set; }
     }
 
-    public partial class Activity
+    
+
+public partial class Activity
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -145,6 +147,7 @@ namespace NationalPark
 
         [JsonProperty("line2")]
         public string Line2 { get; set; }
+
     }
 
     public partial class Contacts
@@ -501,4 +504,6 @@ namespace NationalPark
 
         public static readonly ParseStringConverter Singleton = new ParseStringConverter();
     }
+
+
 }
