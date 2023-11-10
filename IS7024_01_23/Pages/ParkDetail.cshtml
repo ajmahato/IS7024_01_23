@@ -16,19 +16,11 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
-        const parkName = urlParams.get("parkName");
-        const latitude = urlParams.get("latitude");
-        const longitude = urlParams.get("longitude");
-        const image = decodeURIComponent(urlParams.get("image"));
+        const { parkName, latitude, longitude, image } = Object.fromEntries(urlParams.entries());
 
-        // Fetch additional data based on the parkName if needed
-        // Example: Make an API request to get more details
-
-        // Update the page with the data
-        document.getElementById("park-name").textContent = "Park Name: " + parkName;
-        document.getElementById("park-latitude").textContent = "Park Latitude: " + latitude;
-        document.getElementById("park-longitude").textContent = "Park Longitude: " + longitude;
-        document.getElementById("park-image").src = image;
-        // You can populate other fields in a similar way
+        document.getElementById("park-name").textContent = `Park Name: ${parkName}`;
+        document.getElementById("park-latitude").textContent = `Park Latitude: ${latitude}`;
+        document.getElementById("park-longitude").textContent = `Park Longitude: ${longitude}`;
+        document.getElementById("park-image").src = decodeURIComponent(image);
     });
 </script>

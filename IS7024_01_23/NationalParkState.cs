@@ -5,15 +5,15 @@
 //    using StateNamespace;
 //
 //    var stateJson = StateJson.FromJson(jsonString);
+using System;
+using System.Collections.Generic;
+
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace StateNamespace
 {
-    using System;
-    using System.Collections.Generic;
-
-    using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public partial class StateJson
     {

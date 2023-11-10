@@ -6,14 +6,14 @@
 //
 //    var parksData = ParksData.FromJson(jsonString);
 
+using System;
+using System.Collections.Generic;
+
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 namespace parksNamespace
 {
-    using System;
-    using System.Collections.Generic;
-
-    using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public partial class ParksData
     {

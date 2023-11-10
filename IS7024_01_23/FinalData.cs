@@ -5,15 +5,16 @@
 //    using FinalNamespace;
 //
 //    var finalData = FinalData.FromJson(jsonString);
+using System;
+using System.Collections.Generic;
+
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace FinalNamespace
 {
-    using System;
-    using System.Collections.Generic;
 
-    using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public partial class FinalData
     {

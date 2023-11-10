@@ -89,14 +89,17 @@ namespace IS7024_01_23.Pages
         private async Task<List<Park>> GetParkData()
         {
             List<Park> Parks = new List<Park>();
-            return await Task.Run(async () =>
+
+            try
             {
                 var config = new ConfigurationBuilder()
-                .AddUserSecrets<Program>()
-                .Build();
+                    .AddUserSecrets<Program>()
+                    .Build();
                 string apikey = config["NPSkey"];
 
-                Task<HttpResponseMessage> parkTask = client.GetAsync("https://developer.nps.gov/api/v1/parks?limit=5&api_key="+apikey);
+                var url = "https://developer.nps.gov/api/v1/parks?limit=5&api_key=OYKRBWxnitTDzh8ovGqci8Ilgwr6l3gqIZ20QBHU";
+
+                Task<HttpResponseMessage> parkTask = client.GetAsync(url);
 
                 HttpResponseMessage parkResponse = await parkTask;
                 Task<string> parkTaskString = parkResponse.Content.ReadAsStringAsync();
@@ -118,8 +121,14 @@ namespace IS7024_01_23.Pages
                 }
                 //NationalParkData nationalPark = NationalParkData.FromJson(parkJson);
                 Parks = nationalPark.Data;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching park data: {ex.Message}");
                 return Parks;
-            });
+            }
+
+            return Parks;
         }
         /// <summary>
         /// This function calls the weatherbit API and gets the weather forecast for the next seven days.
@@ -129,14 +138,16 @@ namespace IS7024_01_23.Pages
         {
             WeatherData weatherdata = new WeatherData();
             WeatherData weather = new WeatherData();
-            return await Task.Run(async () =>
+
+            try
             {
                 var config = new ConfigurationBuilder()
-                .AddUserSecrets<Program>()
-                .Build();
+                    .AddUserSecrets<Program>()
+                    .Build();
                 string apikey = config["weatherkey"];
+                var WeatherTask = "https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=7cf5efad785c40b4b17b0d30370c265d";
 
-                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key="+apikey);
+                Task<HttpResponseMessage> weatherTask = client.GetAsync(WeatherTask);
                 HttpResponseMessage weatherResponse = await weatherTask;
                 Task<string> weatherTaskString = weatherResponse.Content.ReadAsStringAsync();
                 string weatherJson = weatherTaskString.Result;
@@ -157,8 +168,15 @@ namespace IS7024_01_23.Pages
                     }
                 }
                 //weatherdata = weather.Data;
+            }
+            catch (Exception ex)
+            {
+               
+                Console.WriteLine($"Error fetching weather data: {ex.Message}");
                 return weatherdata;
-            });
+            }
+
+            return weather;
         }
         private async Task<List<ParkData>> GetNewJson(List<Park> parks)
         {
@@ -169,7 +187,8 @@ namespace IS7024_01_23.Pages
             List<Image> parkImages1 = new List<Image>();
 
             int count = 0;
-            return await Task.Run(async () =>
+
+            try
             {
                 foreach (Park park in parks)
                 {
@@ -179,6 +198,7 @@ namespace IS7024_01_23.Pages
                     parkAddress1.Add(parkAddress);
                     parkImages1.Add(parkImages);
                 }
+
                 for (int i = 0; i < parkImages1.Count; i++)
                 {
 
@@ -192,21 +212,27 @@ namespace IS7024_01_23.Pages
                         City = parkAddress1[i].City,
                         StateCode = parkAddress1[i].StateCode
                     };
+
                     parkdata.Add(data);
-
-
                 }
+
                 ViewData["Address"] = parkAddress1;
                 ViewData["Images"] = parkImages1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 return parkdata;
-            });
-        }
+            }
 
+            return parkdata;
+        }
         private static async Task<FinalData> GetFinalJson(ParkData parks, List<Datum> weather)
         {
             FinalData finaldata = new FinalData();
             List<WeatherDetails> weatherdatas = new List<WeatherDetails>();
-            return await Task.Run(async () =>
+
+            try
             {
                 for (int i = 0; i < weather.Count; i++)
                 {
@@ -217,6 +243,7 @@ namespace IS7024_01_23.Pages
                         MinTemp = weather[i].MinTemp,
                         Description = weather[i].Weather.Description
                     };
+
                     weatherdatas.Add(weatherdata);
                 }
 
@@ -231,9 +258,15 @@ namespace IS7024_01_23.Pages
                     StateCode = parks.StateCode,
                     Weather = weatherdatas
                 };
-                return finaldata;
-            });
 
+                return finaldata;
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                return finaldata;
+            }
         }
     }
 }
