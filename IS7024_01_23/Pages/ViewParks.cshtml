@@ -24,12 +24,14 @@
                             <p class="card-text">
                                         @park.Description
                                         <br>
+                            <p>
                                         <b>Address:</b>
-                                        <br>
+                                         <br>
                                         @park.City<br>
                                         @park.StateCode<br>
                                         @park.Latitude<br>
                                         @park.Longitude<br>
+                            </p>
                                         <a class="view-details-button"
                                         href="ParkDetail?parkName=@park.ParkName&latitude=@park.Latitude&longitude=@park.Longitude&image=@park.Images">
                                         View Details</a>
