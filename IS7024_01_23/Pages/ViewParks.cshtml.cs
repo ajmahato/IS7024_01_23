@@ -83,9 +83,8 @@ namespace IS7024_01_23.Pages
                 .Build();
                 string apikey = config["NPSkey"];
 
-                var url = "https://developer.nps.gov/api/v1/parks?stateCode=" + statecode + "&limit=5&api_key="+apikey;
-                
-                
+                var url = "https://developer.nps.gov/api/v1/parks?stateCode=" + statecode + "&limit=5&api_key=OYKRBWxnitTDzh8ovGqci8Ilgwr6l3gqIZ20QBHU";
+
                 Task<HttpResponseMessage> parkTask = client.GetAsync(url);
 
                 HttpResponseMessage parkResponse = await parkTask;
