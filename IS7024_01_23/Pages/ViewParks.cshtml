@@ -6,55 +6,56 @@
 @{
     ViewData["Title"] = "Home page";
     List<ParkData> parks = (List<ParkData>)ViewData["Parks"];
+    var errorMsg = ViewData["ErrorMessage"];
 }
 
 <div class="jumbotron jumbotron-fluid">
 
+    
     @{
-        foreach (ParkData park in parks)
+        if (errorMsg == "Error")
         {
-            <br>
-            <div class="container">
-                <div class="row justify-content-md-center">
+            <p class="alert-danger fw-bold center-form centerdiv">The JSON structure for the selected state has been updated, and as a result, the list of national parks cannot be displayed at the moment. We apologize for any inconvenience and appreciate your patience as we work to resolve this issue. Please check back later, and thank you for your understanding.</p>
+        }
+        else
+        {
+            foreach (ParkData park in parks)
+            {
+                <br>
+                <div class="container">
+                    <div class="row justify-content-md-center">
 
-                    <div class="card" style="width:40rem; border:1px solid green">
-                                <img class="card-img-top" src="@park.Images" alt="Card image cap">
-                        <div class="card-body">
-                                    <h5 class="card-title">@park.ParkName</h5>
-                            <p class="card-text">
-                                        @park.Description
-                                        <br>
-                                        <b>Address:</b>
-                                        <br>
-                                        @park.City<br>
-                                        @park.StateCode<br>
-                                        @park.Latitude<br>
-                                        @park.Longitude<br>
-                                        <a class="view-details-button"
-                                        href="ParkDetail?parkName=@park.ParkName&latitude=@park.Latitude&longitude=@park.Longitude&image=@park.Images">
-                                        View Details</a>
+                        <div class="card" style="width:40rem; border:1px solid green">
+                            <img class="card-img-top" src="@park.Images" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@park.ParkName</h5>
+                                <p class="card-text">
+                                    @park.Description
+                                    <br>
+                                    <b>Address:</b>
+                                    <br>
+                                    @park.City<br>
+                                    @park.StateCode<br>
+                                    @park.Latitude<br>
+                                    @park.Longitude<br>
 
+                                    <a class="view-details-button"
+                                       asp-page="ParkDetail"
+                                       asp-route-parkName="@park.ParkID">
+                                        View Details
+                                    </a>
 
-                            </p>
-                    
+                                </p>
+
+                            </div>
+
                         </div>
 
                     </div>
-            
-                </div>
-        
-            </div>
 
+                </div>
+
+            }
         }
     }
 </div>
-
-@* <script>
-    document.querySelectorAll(".view-details-button").forEach(button => {
-        button.addEventListener("click", function (event) {
-            const parkName = event.currentTarget.getAttribute("data-park-id");
-            const url = 'ParkDetail?parkName=${encodeURIComponent(parkName)}';
-            window.location.href = url;
-        });
-    });
-</script> *@

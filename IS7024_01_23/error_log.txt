@@ -1,0 +1,40 @@
+[11/17/2023 8:08:42 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks) in C:\Users\ajmah\OneDrive\Documents\Visual Studio 2022\Code Snippets\IS7024_01_23\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 77
+--------------------------------------------------
+[11/17/2023 8:32:30 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks)
+--------------------------------------------------
+[11/17/2023 8:32:53 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks)
+--------------------------------------------------
+[11/17/2023 8:40:08 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks) in C:\Users\ajmah\OneDrive\Documents\Visual Studio 2022\Code Snippets\IS7024_01_23\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 77
+--------------------------------------------------
+[11/17/2023 8:40:36 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks)
+--------------------------------------------------
+[11/17/2023 8:40:49 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks)
+--------------------------------------------------
+[11/17/2023 8:41:00 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks)
+--------------------------------------------------
+[11/17/2023 8:41:13 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks)
+--------------------------------------------------
+[11/17/2023 8:41:24 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks)
+--------------------------------------------------
+[11/17/2023 8:42:41 PM] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks)
+--------------------------------------------------

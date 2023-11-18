@@ -5,15 +5,15 @@
 //    using NationalPark;
 //
 //    var welcome = Welcome.FromJson(jsonString);
+using System;
+using System.Collections.Generic;
+
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace NationalPark
 {
-    using System;
-    using System.Collections.Generic;
-
-    using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public partial class NationalParkData
     {
