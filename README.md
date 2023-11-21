@@ -17,7 +17,7 @@ Introducing **HikeIt**, your ultimate weekend getaway companion. We proudly pres
 
 ## Storyboard
 ***
-![MicrosoftTeams-image (7)](https://github.com/ajmahato/IS7024_01_23/assets/143025251/89a27208-aec6-4b50-922d-417d26bab4a5)
+![MicrosoftTeams-image (7)](https://github.com/ajmahato/IS7024_01_23/assets/37789394/244c2341-5ddd-4f37-9d36-0300a9106cac)
 
 ## Data Feeds
 ***
