@@ -1,6 +1,12 @@
 ﻿@page
+@using NationalPark;
+@using WeatherSpace;
+@using parksNamespace;
+@using WeatherSchemaData;
 @model ParkDetailModel
 @{
+    List<ParkData> parks = (List<ParkData>)ViewData["Parks"];
+    List<WeatherInfo> weather = (List <WeatherInfo>) ViewData["Weathers"];
 }
 
 <div id="park-details-container">
@@ -10,6 +16,13 @@
     <p id="park-latitude"></p>
     <p id="park-longitude"></p>
     <img id="park-image" src="" alt="Park Image">
+    @{
+        foreach(WeatherInfo weathe in weather)
+        {
+            <tr>@weathe.Datetime</tr>
+            <tr>@weathe.Description</tr>
+        }
+    }
     <!-- Add other fields here as needed -->
 </div>
 

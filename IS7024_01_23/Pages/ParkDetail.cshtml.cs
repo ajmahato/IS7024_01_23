@@ -7,6 +7,7 @@ using parksNamespace;
 using System.Net.Http;
 using System.Globalization;
 using WeatherSpace;
+using WeatherSchemaData;
 
 namespace IS7024_01_23.Pages
 {
@@ -25,24 +26,31 @@ namespace IS7024_01_23.Pages
 
         public async Task OnGet()
         {
-            
+            string pID = Request.Query["parkName"].ToString();
+
             List<Datum> forecastDatas = new List<Datum>();
             
-            Task<List<StateData>> ParkData = GetParkData(ParkID);
+            Task<List<StateData>> ParkData = GetParkData(pID);
             List<StateData> parks = ParkData.Result;
-
-            Task<WeatherData> weatherData = GetWeatherData();
-            WeatherData weathers = weatherData.Result;
-            forecastDatas = weathers.Data;
 
             Task<List<ParkData>> parksdata = GetNewJson(parks);
             List<ParkData> modifiedparksdata = parksdata.Result;
+
+            string cityState = modifiedparksdata[0].City + "," + modifiedparksdata[0].StateCode;
+
+            Task<WeatherData> weatherData = GetWeatherData(cityState);
+            WeatherData weathers = weatherData.Result;
+            forecastDatas = weathers.Data;
+
+            Task<List<WeatherInfo>> weatherdata = GetFinalWeather(forecastDatas);
+            List<WeatherInfo> weatherForecast = weatherdata.Result;
+
 
 
             //Task<List<FinalData>> finalData = GetFinalJson(modifiedparksdata, forecastDatas) 
 
             ViewData["Parks"] = modifiedparksdata;
-            ViewData["Weathers"] = forecastDatas;
+            ViewData["Weathers"] = weatherForecast;
         }
         private async Task<List<StateData>> GetParkData(string ParkID)
         {
@@ -68,18 +76,41 @@ namespace IS7024_01_23.Pages
             });
         }
 
-        private async Task<WeatherData> GetWeatherData()
+        private async Task<WeatherData> GetWeatherData(string parkAddress)
         {
             var weather = new WeatherData();
             return await Task.Run(async () =>
             {
-                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city=Cincinnati,OH&key=e1fc3e975b86438480ca1c4c8d3a41d4");
+                Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city="+ parkAddress + "&key=e1fc3e975b86438480ca1c4c8d3a41d4");
                 HttpResponseMessage weatherResponse = await weatherTask;
                 Task<string> weatherTaskString = weatherResponse.Content.ReadAsStringAsync();
                 string weatherJson = weatherTaskString.Result;
                 weather = WeatherData.FromJson(weatherJson);
                 return weather;
             });
+        }
+
+        private async Task<List<WeatherInfo>> GetFinalWeather(List<Datum> data)
+        { 
+            List<WeatherInfo> weatherdata =  new List<WeatherInfo>();
+            foreach (var dataItem in data)
+            {
+                var transformeddata = new WeatherInfo
+                {
+                    AppMaxTemp = dataItem.AppMaxTemp,
+                    AppMinTemp = dataItem.AppMinTemp,
+                    Clouds = dataItem.Clouds,
+                    Datetime = dataItem.Datetime,
+                    Precip = dataItem.Precip,
+                    Description = dataItem.Weather.Description,
+                    Code = dataItem.Weather.Code,
+                    Icon = dataItem.Weather.Icon,
+                    WindCdir = dataItem.WindCdir,
+                    WindSpd = dataItem.WindSpd
+                };
+                weatherdata.Add(transformeddata);
+            }
+            return weatherdata;
         }
 
         private async Task<List<ParkData>> GetNewJson(List<StateData> parks)
