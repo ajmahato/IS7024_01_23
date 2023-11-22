@@ -17,7 +17,7 @@ Introducing **HikeIt**, your ultimate weekend getaway companion. We proudly pres
 
 ## Storyboard
 ***
-![MicrosoftTeams-image (7)](https://github.com/ajmahato/IS7024_01_23/assets/143025251/89a27208-aec6-4b50-922d-417d26bab4a5)
+![MicrosoftTeams-image (7)](https://github.com/ajmahato/IS7024_01_23/assets/37789394/244c2341-5ddd-4f37-9d36-0300a9106cac)
 
 ## Data Feeds
 ***
@@ -26,39 +26,37 @@ Introducing **HikeIt**, your ultimate weekend getaway companion. We proudly pres
 
 ## Functional Requirements
 
-### Requirement 100.0 : Look up a hiking trail
+### Requirement 100.0 : Look up different National parks in my state.
 
 **Scenario**
 
-As a user, I want to get a list of hiking spots located near me.
+As a user, I want to get a list of National parks in my state of residence.
 
 **Dependencies**
 
-Hiking spot data is available along with the address.
+National park information is available along with weather information for that area.
 
 **Assumptions**
 
 a) API might not cover all possible geographical locations
 
-b) API providing hiking spot data will be available and reliable.
+b) API providing National Park data will be available and reliable.
 
-c) User will have to manually enter their city/state if application is not able to access user location.
+c) User will have to manually enter their state if application is not able to access user location.
 
 **Example**
 
 **1.1**
 
-**Given** a list of possible hiking spots is available
+**Given** a list of possible National parks is the state.
 
-**When** I select “Cincinnati Nature Center”
+**When** I select “Yosemite National Park”
 
-**Then** I should be directed to a page that gives me a brief overview of Cincinnati Nature Center. Some of the points to be covered in the overview are
+**Then** I should be directed to a page that gives me a brief overview of Yosemite National Park. Some of the points to be covered in the overview are
 
 - Address 
 -	Weather
 -	Pictures of the location
--	Popular trails covered by visitors.
--	Possible accommodation
 
 
 ### Requirement 101.0: Look up the weather at a hiking spot
@@ -79,7 +77,7 @@ API will provide the current weather weather forecast and also inform the use if
 
 **1.1**
 
-**Given** I’ve selected Cincinnati Nature Center, along with the overview I’ll also get an option to check out the weather at that location.
+**Given** I’ve selected Yosemite National Park, along with the overview I’ll also get an option to check out the weather at that location.
 
 **When** I choose to check out the weather
 
@@ -89,7 +87,7 @@ a)    	Whether or not its raining heavily
 
 b)    	Whether its too hot to hike at the spot
 
-c)    	The best time of the year to visit
+c)    	7 day weather forecast
 
 
 
