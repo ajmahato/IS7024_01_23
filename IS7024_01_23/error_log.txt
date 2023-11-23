@@ -38,3 +38,31 @@ StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
 StackTrace:    at System.Collections.Generic.List`1.get_Item(Int32 index)
    at IS7024_01_23.Pages.ViewParksModel.GetNewJson(List`1 parks)
 --------------------------------------------------
+[22-11-2023 20:04:41] HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+StackTrace:    at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at IS7024_01_23.Pages.ViewParksModel.GetParkData(String statecode) in D:\Univ of Cin\Fall_Second_Half\XML\Project\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 49
+--------------------------------------------------
+[22-11-2023 20:05:13] HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+StackTrace:    at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at IS7024_01_23.Pages.ViewParksModel.GetParkData(String statecode) in D:\Univ of Cin\Fall_Second_Half\XML\Project\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 49
+--------------------------------------------------
+[22-11-2023 20:09:51] HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+StackTrace:    at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at IS7024_01_23.Pages.ViewParksModel.GetParkData(String statecode) in D:\Univ of Cin\Fall_Second_Half\XML\Project\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 49
+--------------------------------------------------
+[22-11-2023 20:09:54] HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+StackTrace:    at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at IS7024_01_23.Pages.ViewParksModel.GetParkData(String statecode) in D:\Univ of Cin\Fall_Second_Half\XML\Project\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 49
+--------------------------------------------------
+[22-11-2023 20:49:27] HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+StackTrace:    at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at IS7024_01_23.Pages.ViewParksModel.GetParkData(String statecode) in D:\Univ of Cin\Fall_Second_Half\XML\Project\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 49
+--------------------------------------------------
+[22-11-2023 20:54:13] HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+StackTrace:    at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at IS7024_01_23.Pages.ViewParksModel.GetParkData(String statecode) in D:\Univ of Cin\Fall_Second_Half\XML\Project\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 49
+--------------------------------------------------
+[22-11-2023 20:54:58] HttpRequestException: Response status code does not indicate success: 403 (Forbidden).
+StackTrace:    at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at IS7024_01_23.Pages.ViewParksModel.GetParkData(String statecode) in D:\Univ of Cin\Fall_Second_Half\XML\Project\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 49
+--------------------------------------------------

@@ -9,7 +9,7 @@
     List<WeatherInfo> weather = (List <WeatherInfo>) ViewData["Weathers"];
 }
 
-<div id="park-details-container">
+@* <div id="park-details-container">
     <h1>Park Details</h1>
     <p id="park-name"></p>
     <p id="park-description"></p>
@@ -17,14 +17,79 @@
     <p id="park-longitude"></p>
     <img id="park-image" src="" alt="Park Image">
     @{
-        foreach(WeatherInfo weathe in weather)
+        foreach(WeatherInfo wthr in weather)
         {
-            <tr>@weathe.Datetime</tr>
-            <tr>@weathe.Description</tr>
+            <tr>@wthr.Datetime</tr>
+            <tr>@wthr.Description</tr>
         }
     }
     <!-- Add other fields here as needed -->
+</div> *@
+
+
+
+<div class="jumbotron jumbotron-fluid">
+
+    <div class="container" style="align-self:center">
+        @foreach (ParkData park in parks)
+        {
+            <div class="card">
+                
+                    <img class="card-img-top mx-auto" src="@park.Images" alt="Card image cap" style="max-width:70rem">
+                
+
+                <div class="card-body">
+                    <center><h4 class="custom-card-title">@park.ParkName</h4></center>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <p class="custom-card-text">
+                                @park.Description
+                                <br />
+                                <b>Address:</b>
+                                <br />
+                                @park.City<br />
+                                @park.StateCode<br />
+                                @park.Latitude<br />
+                                @park.Longitude<br />
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            @{
+                                if (weather.Any())
+                                {
+                                    WeatherInfo wthr = weather.First();
+                                    <div class="card" style="background-color: #87CEEB; color: white;">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Weather Information for @park.City</h4>                        
+                                            <p class="card-text">Description: @wthr.Description</p>
+                                            <p class="card-text">Maximum Temperature: @wthr.AppMaxTemp, Minimum Temperature: @wthr.AppMinTemp</p>
+                                            <p class="card-text">Cloudy Percentage: @wthr.Clouds</p>
+                                            <p class="card-text">Precipitation: @wthr.Precip</p>
+                                            <p class="card-text">Wind Speed: @wthr.WindSpd, Wind Direction: @wthr.WindCdir</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    
+
+
+                </div>
+
+            </div>
+
+
+        }
+        
+
+    </div>
+
 </div>
+
+
 
 @* <script>
     document.addEventListener("DOMContentLoaded", function () {

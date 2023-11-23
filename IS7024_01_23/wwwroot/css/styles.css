@@ -28,3 +28,9 @@
     height: 65px;
     text-align: center;
 }
+
+.custom-card-text {
+    background-color: #808080; /* Light grey background color */
+    padding: 15px; /* Add padding for better readability */
+    border-radius: 8px; /* Add border radius for rounded corners */
+}
