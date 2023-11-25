@@ -1,10 +1,16 @@
 ﻿body {
-    background-image: url('https://images.alphacoders.com/191/thumb-1920-191013.jpg');
+    
+}
+
+.mainclass {
+    background-image: url('../images/hikeitbackground.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center center;
 }
+
+
+
 
 .centerdiv {
     display: flex;
@@ -33,4 +39,10 @@
     background-color: #808080; /* Light grey background color */
     padding: 15px; /* Add padding for better readability */
     border-radius: 8px; /* Add border radius for rounded corners */
+}
+
+.headformat {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    /* You can add more styling here if needed */
 }
