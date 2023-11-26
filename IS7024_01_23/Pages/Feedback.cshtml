@@ -1,0 +1,73 @@
+﻿@page
+@model IS7024_01_23.Pages.FeedbackModel
+@{
+    ViewData["Title"] = "User Feedback";
+}
+
+<h2>User Feedback</h2>
+<div class="container mt-5">
+    <h2>User Form</h2>
+
+    <form method="post" asp-page-handler="SaveFormData">
+        <div class="form-group">
+            <label for="Name">Name:</label>
+            <input type="text" class="form-control" id="Name" name="Name" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" id="Email" name="Email" required />
+        </div>
+
+        <div class="form-group">
+            <label for="DateOfVisit">Date of Visit:</label>
+            <input type="date" class="form-control" id="DateOfVisit" name="DateOfVisit" required />
+        </div>
+
+        <div class="form-group">
+            <label for="ParkName">Park Name:</label>
+            <input type="text" class="form-control" id="ParkName" name="ParkName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Comments">Comments:</label>
+            <textarea class="form-control" id="Comments" name="Comments"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+<div class="container mt-5">
+
+    @if (Model.FeedbackData != null && Model.FeedbackData.Count > 0)
+    {
+        <h2>User feedbacks</h2>
+        <table style="width: 80%; margin-top: 10px; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid black;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;">Name</th>
+                    <th style="border: 1px solid black;">Email</th>
+                    <th style="border: 1px solid black;">Date of Visit</th>
+                    <th style="border: 1px solid black;">ParkName</th>
+                    <th style="border: 1px solid black;">Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in Model.FeedbackData)
+                {
+                    <tr>
+                        <td style="border: 1px solid black;">@data.Name</td>
+                        <td style="border: 1px solid black;">@data.Email</td>
+                        <td style="border: 1px solid black;">@data.DateOfVisit</td>
+                        <td style="border: 1px solid black;">@data.ParkName</td>
+                        <td style="border: 1px solid black;">@data.Comments</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No feedback data available.</p>
+    }
+</div>

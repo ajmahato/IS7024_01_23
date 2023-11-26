@@ -66,3 +66,27 @@ StackTrace:    at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
 StackTrace:    at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
    at IS7024_01_23.Pages.ViewParksModel.GetParkData(String statecode) in D:\Univ of Cin\Fall_Second_Half\XML\Project\IS7024_01_23\Pages\ViewParks.cshtml.cs:line 49
 --------------------------------------------------
+[11/26/2023 1:10:10 AM] JsonSerializationException: Error converting value {null} to type 'System.Double'. Path 'data[0].ozone', line 1, position 373.
+StackTrace:    at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   at Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at WeatherSpace.WeatherData.FromJson(String json) in C:\Users\ajmah\OneDrive\Documents\Visual Studio 2022\Code Snippets\IS7024_01_23\IS7024_01_23\WeatherData.cs:line 165
+   at IS7024_01_23.Pages.ParkDetailModel.GetWeatherData(String parkAddress) in C:\Users\ajmah\OneDrive\Documents\Visual Studio 2022\Code Snippets\IS7024_01_23\IS7024_01_23\Pages\ParkDetail.cshtml.cs:line 98
+--------------------------------------------------
+[11/26/2023 1:10:21 AM] NullReferenceException: Object reference not set to an instance of an object.
+StackTrace:    at IS7024_01_23.Pages.ParkDetailModel.GetFinalWeather(List`1 data) in C:\Users\ajmah\OneDrive\Documents\Visual Studio 2022\Code Snippets\IS7024_01_23\IS7024_01_23\Pages\ParkDetail.cshtml.cs:line 122
+--------------------------------------------------

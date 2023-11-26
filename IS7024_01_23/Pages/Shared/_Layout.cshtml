@@ -10,56 +10,44 @@
     <link rel="stylesheet" href="~/IS7024_01_23.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#SerachValue").autocomplete({
+                source: '/AutoCompleteStateName',
+                minLength: 2
+            });
+        });
+    </script>
+
+
 </head>
 
 <body>
     <header>
-        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">IS7024_01_23</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/ViewParks">ViewParks</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> *@
         <nav class="navbar navbar-expand-lg navbar-light py-4 px-4" style="background-color: #008080 ">
             <a class="navbar-brand" asp-page="/Index"><img src="~/images/Logo.png" alt="HikeIt logo" width="65px" /></a>
-            <a class="navbar-brand" asp-page="/Index">Hike It</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse navClass" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-page="/Index"><img src="~/images/home.png" width="50px" /> <span class="sr-only"></span></a>
+                        <a class="nav-link icon" title="Home" asp-page="/Index"><img src="~/images/home.png" width="50px" /> <span class="sr-only text">Home</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-page="/ViewParks"><img src="~/images/hikeit.png" width="50px" /> <span class="sr-only"></span></a>
+                        <a class="nav-link icon" title="National park" asp-page="/ViewParks"><img src="~/images/nationalpark.png" width="50px" /> <span class="sr-only text">National Park</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link icon" title="Feedback" asp-page="/ViewParks"><img src="~/images/feedback.png" width="50px" /> <span class="sr-only text"> Feedback</span></a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ms-auto">
-                     <li class="nav-item">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                     </li>
-                     <li class="nav-item">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color: black">Search</button>
-                     </li>
-                </ul>
+                <form method="get" class="searchClass">
+                    <input name="searchValue" id="SerachValue" placeholder="Search a state" />
+                    <input type="submit"/>
+                </form>
                 
             </div>
         </nav>

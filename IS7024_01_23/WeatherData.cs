@@ -85,7 +85,7 @@ namespace WeatherSpace
         public long MoonsetTs { get; set; }
 
         [JsonProperty("ozone")]
-        public double Ozone { get; set; }
+        public string Ozone { get; set; }
 
         [JsonProperty("pop")]
         public long Pop { get; set; }
