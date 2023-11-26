@@ -14,7 +14,7 @@
 
     <form method="get" class="center-form" action="/ViewParks">
         <label for="stateDropdown" class="sizeup">Select a State:</label>
-        <select id="stateDropdown" name="stateCode" class="sizeup form-control">
+        <select id="stateDropdown" name="stateCode" class="sizeup form-control dropdown_height">
             @foreach (var state in GetStatesFromJsonFile("states.json"))
             {
                 <option value=@state.Value>@state.Key</option>

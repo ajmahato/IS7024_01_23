@@ -63,8 +63,7 @@ namespace IS7024_01_23.Pages
                 .Build();
 
                 string apikey = config["NPSkey"];
-                //string url = $"https://developer.nps.gov/api/v1/parks?stateCode={statecode}&limit=25&api_key=OYKRBWxnitTDzh8ovGqci8Ilgwr6l3gqIZ20QBHU";
-                var url = "https://developer.nps.gov/api/v1/parks?q=" + ParkID + "&limit=1&api_key=OYKRBWxnitTDzh8ovGqci8Ilgwr6l3gqIZ20QBHU";
+                var url = "https://developer.nps.gov/api/v1/parks?q=" + ParkID + "&limit=1&api_key="+ apikey+"";
 
                 HttpResponseMessage parkResponse = await client.GetAsync(url);
                 parkResponse.EnsureSuccessStatusCode();  // Ensure a successful response
@@ -88,9 +87,9 @@ namespace IS7024_01_23.Pages
                     .AddUserSecrets<Program>()
                     .Build();
                 string apikey = config["weatherkey"];
-                
+
                 var url = $"https://api.weatherbit.io/v2.0/forecast/daily?city={parkAddress}&key={apikey}";
-                
+
                 HttpResponseMessage weatherResponse = await client.GetAsync(url);
                 weatherResponse.EnsureSuccessStatusCode();
 
@@ -103,15 +102,6 @@ namespace IS7024_01_23.Pages
                 LogException(ex); 
             }
             return weather;
-            //return await Task.Run(async () =>
-            //{
-            //    Task<HttpResponseMessage> weatherTask = client.GetAsync("https://api.weatherbit.io/v2.0/forecast/daily?city="+ parkAddress + "&key=7cf5efad785c40b4b17b0d30370c265d");
-            //    HttpResponseMessage weatherResponse = await weatherTask;
-            //    Task<string> weatherTaskString = weatherResponse.Content.ReadAsStringAsync();
-            //    string weatherJson = weatherTaskString.Result;
-            //    weather = WeatherData.FromJson(weatherJson);
-            //    return weather;
-            //});
         }
 
         private async Task<List<WeatherInfo>> GetFinalWeather(List<Datum> data)
@@ -143,32 +133,6 @@ namespace IS7024_01_23.Pages
             }
             return weatherdata;
         }
-
-
-        //private async Task<List<WeatherInfo>> GetFinalWeather(List<Datum> data)
-        //{
-        //    List<WeatherInfo> weatherdata = new List<WeatherInfo>();
-
-        //    foreach (var dataItem in data)
-        //    {
-        //        var transformeddata = new WeatherInfo
-        //        {
-        //            AppMaxTemp = dataItem.AppMaxTemp,
-        //            AppMinTemp = dataItem.AppMinTemp,
-        //            Clouds = dataItem.Clouds,
-        //            Datetime = dataItem.Datetime,
-        //            Precip = dataItem.Precip,
-        //            Description = dataItem.Weather.Description,
-        //            Code = dataItem.Weather.Code,
-        //            Icon = dataItem.Weather.Icon,
-        //            WindCdir = dataItem.WindCdir,
-        //            WindSpd = dataItem.WindSpd
-        //        };
-        //        weatherdata.Add(transformeddata);
-        //    }
-        //    return weatherdata;
-        //}
-
 
         private async Task<List<ParkData>> GetNewJson(List<StateData> parks)
         {

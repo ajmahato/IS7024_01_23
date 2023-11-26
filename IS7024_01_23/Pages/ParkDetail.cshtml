@@ -9,25 +9,6 @@
     List<WeatherInfo> weather = (List <WeatherInfo>) ViewData["Weathers"];
 }
 
-@* <div id="park-details-container">
-    <h1>Park Details</h1>
-    <p id="park-name"></p>
-    <p id="park-description"></p>
-    <p id="park-latitude"></p>
-    <p id="park-longitude"></p>
-    <img id="park-image" src="" alt="Park Image">
-    @{
-        foreach(WeatherInfo wthr in weather)
-        {
-            <tr>@wthr.Datetime</tr>
-            <tr>@wthr.Description</tr>
-        }
-    }
-    <!-- Add other fields here as needed -->
-</div> *@
-
-
-
 <div class="jumbotron jumbotron-fluid">
 
     <div class="container" style="align-self:center">
@@ -35,7 +16,7 @@
         {
             <div class="card">
                 
-                    <img class="card-img-top mx-auto" src="@park.Images" alt="Card image cap" style="max-width:70rem">
+                    <img class="card-img-top mx-auto imgClass" src="@park.Images" alt="Card image cap" style="max-width:70rem">
                 
 
                 <div class="card-body">
@@ -43,7 +24,7 @@
                     <div class="row">
 
                         <div class="col-md-6">
-                            <p class="custom-card-text">
+                            <p class="cardClass1">
                                 @park.Description
                                 <br />
                                 <b>Address:</b>
@@ -60,7 +41,7 @@
                                 if (weather.Any())
                                 {
                                     WeatherInfo wthr = weather.First();
-                                    <div class="card" style="background-color: #87CEEB; color: white;">
+                                    <div class="card cardClass1">
                                         <div class="card-body">
                                             <h4 class="card-title">Weather Information for @park.City</h4>                        
                                             <p class="card-text">Description: @wthr.Description</p>
@@ -89,24 +70,3 @@
 
 </div>
 
-
-
-@* <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const parkName = urlParams.get("parkName");
-        const latitude = urlParams.get("latitude");
-        const longitude = urlParams.get("longitude");
-        const image = decodeURIComponent(urlParams.get("image"));
-
-        // Fetch additional data based on the parkName if needed
-        // Example: Make an API request to get more details
-
-        // Update the page with the data
-        document.getElementById("park-name").textContent = "Park Name: " + parkName;
-        document.getElementById("park-latitude").textContent = "Park Latitude: " + latitude;
-        document.getElementById("park-longitude").textContent = "Park Longitude: " + longitude;
-        document.getElementById("park-image").src = image;
-        // You can populate other fields in a similar way
-    });
-</script> *@

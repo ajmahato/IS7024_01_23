@@ -1,52 +1,51 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.we.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
+    <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - IS7024_01_23</title>
     <link href="~/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/IS7024_01_23.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site_mobile.css" media="screen and (max-width: 767px)" />
+    <link rel="stylesheet" href="~/css/site_pdf.css"  media="pdf" />
+ @*    <link rel="stylesheet" href="~/IS7024_01_23.styles.css" />
+    <link href="~/css/styles.css" rel="stylesheet" /> *@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#SerachValue").autocomplete({
-                source: '/AutoCompleteStateName',
-                minLength: 2
-            });
-        });
-    </script>
 
 
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light py-4 px-4" style="background-color: #008080 ">
+        <nav class="navbar navbar-expand-lg navbar-light py-4 px-4 navbarClass">
             <a class="navbar-brand" asp-page="/Index"><img src="~/images/Logo.png" alt="HikeIt logo" width="65px" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse navClass" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justifyClass" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link icon" title="Home" asp-page="/Index"><img src="~/images/home.png" width="50px" /> <span class="sr-only text">Home</span></a>
+                        <a class="nav-link icon" title="Home" asp-page="/Index"><img src="~/images/home.png" width="50px" alt="Home icon" /> <span class="sr-only text">Home</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link icon" title="National park" asp-page="/ViewParks"><img src="~/images/nationalpark.png" width="50px" /> <span class="sr-only text">National Park</span></a>
+                        <a class="nav-link icon" title="National park" asp-page="/ViewParks"><img src="~/images/nationalpark.png" width="50px" alt="View random National Parks" /> <span class="sr-only text">National Park</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link icon" title="Feedback" asp-page="/ViewParks"><img src="~/images/feedback.png" width="50px" /> <span class="sr-only text"> Feedback</span></a>
+                        <a class="nav-link icon" title="Feedback" asp-page="/Feedback"><img src="~/images/feedback.png" width="50px" alt="Feedback option" /> <span class="sr-only text"> Feedback</span></a>
                     </li>
                 </ul>
-                <form method="get" class="searchClass">
-                    <input name="searchValue" id="SerachValue" placeholder="Search a state" />
-                    <input type="submit"/>
+                <form method="get" class="searchClass" action="https://neighborhoodwatch.azurewebsites.net/api/values">
+                    <input type="text" name="searchValue" id="SearchValue" placeholder="Search a state" />
+                    <label><button type="submit" />Submit</label>
                 </form>
                 
             </div>
@@ -69,21 +68,6 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <footer class="text-center text-lg-start" style="background-color: #008080;">
-        <div class="container d-flex justify-content-center py-5">
-            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
-                <i class="fab fa-facebook-f"></i>
-            </button>
-            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
-                <i class="fab fa-youtube"></i>
-            </button>
-            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
-                <i class="fab fa-instagram"></i>
-            </button>
-            <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
-                <i class="fab fa-twitter"></i>
-            </button>
-        </div>
-
         <!-- Copyright -->
         <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2020 Copyright:
@@ -91,5 +75,16 @@
         </div>
         <!-- Copyright -->
     </footer>
+
+
+    <script>
+        $(function () {
+            $("#SearchValue").autocomplete({
+                source: '/AutoCompleteStateName',
+                minLength: 2
+            });
+        });
+    </script>
+
 </body>
 </html>
