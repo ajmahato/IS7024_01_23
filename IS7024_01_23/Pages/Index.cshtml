@@ -9,37 +9,29 @@
     // var parks = ViewData["Parks"];
 }
 
+<div class="container min-vh-100">
+    <h2 class="headformat" style='color: black; font-family: "Montserrat", sans-serif; text-align: center;'>EXPLORE AMERICA'S HIKING TRAILS</h2>
 
-<div class="container text-center centerdiv">
-    <h2 class="headformat">EXPLORE AMERICA'S HIKING TRAILS</h2>
- @*   <form method="post" class="center-form" action="/ViewParks"> *@
     <form method="get" class="center-form" action="/ViewParks">
         <label for="stateDropdown" class="sizeup">Select a State:</label>
-        <select id="stateDropdown" name="stateCode" class="sizeup">
+        <select id="stateDropdown" name="stateCode" class="sizeup form-control">
             @foreach (var state in GetStatesFromJsonFile("states.json"))
             {
                 <option value=@state.Value>@state.Key</option>
             }
-            }
-        </select> 
-        <button type="submit" class="sizeup">Submit</button>
+        </select>
+        <button type="submit" class="sizeup btn btn-primary btn-block mt-3">Submit</button>
     </form>
 </div>
 
 <script>
-    document.getElementById('parkForm').addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent the default form submission
-
-        var selectedState = document.getElementById('stateDropdown').value;
-        var form = document.getElementById('parkForm');
-        console.log(selectedState);
-        // Append the selected state as a query parameter to the form's action URL
-        form.action = '/ViewParks?stateCode=' + selectedState;
-
-        // Submit the form
-        form.submit();
+    document.getElementById('stateDropdown').addEventListener('change', function () {
+        document.getElementById('parkForm').submit();
     });
 </script>
+
+
+
 @functions {
     Dictionary<string, string> GetStatesFromJsonFile(string fileName)
     {
