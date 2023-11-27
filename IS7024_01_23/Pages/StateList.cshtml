@@ -1,0 +1,25 @@
+﻿@page
+@model IS7024_01_23.Pages.StateListModel
+@using IS7024_01_23.Pages;
+@{
+    List<StateDataModel> stateList = (List<StateDataModel>)ViewData["StateList"];
+
+}
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>State Name</th>
+            <th>State Code</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var state in stateList)
+        {
+            <tr>
+                <td>@state.Name</td>
+                <td>@state.Code</td>
+            </tr>
+        }
+    </tbody>
+</table>

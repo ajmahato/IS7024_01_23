@@ -24,10 +24,20 @@ namespace IS7024_01_23.Pages
         {
             _logger = logger;
         }
-
         public void OnGet()
         {
+            LoadApiData();
+        }
+        public void LoadApiData()
+        {
+            using (StreamReader r = new StreamReader("data.json"))
+            {
+                String json = r.ReadToEnd();
+                List<StateDataModel> dataModel = JsonConvert.DeserializeObject<List<StateDataModel>>(json);
+                StateRepository.allStates = dataModel;
+            }
 
         }
+
     }
 }
