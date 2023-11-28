@@ -3,23 +3,33 @@
 @using IS7024_01_23.Pages;
 @{
     List<StateDataModel> stateList = (List<StateDataModel>)ViewData["StateList"];
-
+    string error = (string)ViewData["error"];
 }
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>State Name</th>
-            <th>State Code</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var state in stateList)
-        {
-            <tr>
-                <td>@state.Name</td>
-                <td>@state.Code</td>
-            </tr>
-        }
-    </tbody>
-</table>
+@if (stateList == null || !string.IsNullOrEmpty(error))
+{
+    <blockquote class="blockquote">@error</blockquote>
+}
+
+@if(stateList != null)
+{
+    <div class="container">
+        <table >
+            <thead>
+                <tr>
+                    <th>State Name</th>
+                    <th>State Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var state in stateList)
+                {
+                    <tr>
+                        <td>@state.Name</td>
+                        <td>@state.Code</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
